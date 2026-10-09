@@ -1,0 +1,636 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            #d9fbe8 0%,
+            #f5fff9 35%,
+            #ffffff 75%
+        );
+
+    color: #10251b;
+
+    overflow-x: hidden;
+}
+
+
+button,
+input {
+    font: inherit;
+}
+
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* APP */
+
+.app {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* WELCOME */
+
+.screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+
+.welcome-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding:
+        40px
+        24px
+        32px;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+
+.welcome-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-25px);
+}
+
+
+.welcome-content {
+    width: 100%;
+    max-width: 430px;
+
+    min-height: 720px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* LOGO */
+
+.brand-mark {
+    margin-bottom: 14px;
+}
+
+
+.wolf-circle {
+    width: 88px;
+    height: 88px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 42px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #35d27f,
+            #13a95d
+        );
+
+    box-shadow:
+        0 18px 45px rgba(18, 168, 91, .28),
+        inset 0 2px 3px rgba(255,255,255,.5);
+
+    border: 5px solid rgba(255,255,255,.9);
+
+    animation:
+        logoFloat 4s ease-in-out infinite;
+}
+
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+
+.brand-name {
+    color: #148451;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    letter-spacing: .5px;
+
+    margin-bottom: 28px;
+}
+
+
+h1 {
+    font-size: clamp(34px, 8vw, 48px);
+
+    line-height: 1.08;
+
+    font-weight: 800;
+
+    letter-spacing: -1.8px;
+
+    color: #10251b;
+}
+
+
+h1 span {
+    color: #13a95d;
+}
+
+
+.welcome-subtitle {
+    margin-top: 16px;
+
+    max-width: 330px;
+
+    color: #718077;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* LANGUAGE BUTTON */
+
+.language-button {
+    width: 100%;
+    max-width: 330px;
+
+    margin-top: 34px;
+
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 12px 16px;
+
+    border: 1px solid #dcebe2;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.88);
+
+    box-shadow:
+        0 12px 35px rgba(31, 75, 53, .08);
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+
+.language-button:hover {
+    transform: translateY(-2px);
+
+    border-color: #a9dfc1;
+
+    box-shadow:
+        0 16px 38px rgba(31, 75, 53, .12);
+}
+
+
+.language-button:active {
+    transform: scale(.98);
+}
+
+
+.language-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e8f9ef;
+
+    font-size: 20px;
+}
+
+
+.language-text {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.language-text small {
+    color: #8a9890;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: .8px;
+}
+
+
+.language-text strong {
+    color: #173326;
+
+    font-size: 16px;
+
+    font-weight: 750;
+}
+
+
+.language-arrow {
+    color: #16a15b;
+
+    font-size: 29px;
+
+    line-height: 1;
+}
+
+
+/* TERMS */
+
+.terms {
+    max-width: 330px;
+
+    margin-top: 18px;
+
+    color: #8a958f;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+.terms a {
+    color: #168b52;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* BIG CIRCULAR BUTTON */
+
+.continue-circle {
+    width: 82px;
+    height: 82px;
+
+    margin-top: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    background:
+        linear-gradient(
+            145deg,
+            #36d77f,
+            #0fa75a
+        );
+
+    color: white;
+
+    font-size: 38px;
+    font-weight: 300;
+
+    box-shadow:
+        0 16px 35px rgba(15, 167, 90, .28);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.continue-circle:hover {
+    transform: scale(1.07);
+
+    box-shadow:
+        0 20px 45px rgba(15, 167, 90, .36);
+}
+
+
+.continue-circle:active {
+    transform: scale(.94);
+}
+
+
+.continue-circle span {
+    transform: translateX(2px);
+}
+
+
+.continue-label {
+    margin-top: 9px;
+
+    color: #65736b;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: .3px;
+}
+
+
+/* LANGUAGE SCREEN */
+
+.language-screen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 20;
+
+    padding:
+        max(22px, env(safe-area-inset-top))
+        22px
+        max(25px, env(safe-area-inset-bottom));
+
+    background: #ffffff;
+
+    transform: translateX(100%);
+
+    transition:
+        transform .32s cubic-bezier(.4,0,.2,1);
+
+    overflow-y: auto;
+}
+
+
+.language-screen.open {
+    transform: translateX(0);
+}
+
+
+/* LANGUAGE HEADER */
+
+.language-header {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    min-height: 60px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.back-button {
+    width: 46px;
+    height: 46px;
+
+    flex: 0 0 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #edf8f1;
+
+    color: #168b52;
+
+    font-size: 27px;
+
+    cursor: pointer;
+}
+
+
+.language-header h2 {
+    color: #142a1e;
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    letter-spacing: -.5px;
+}
+
+
+/* SEARCH */
+
+.language-search {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 22px auto 18px;
+
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 16px;
+
+    border-radius: 17px;
+
+    background: #f4f8f5;
+
+    color: #829087;
+}
+
+
+.language-search span {
+    font-size: 24px;
+}
+
+
+.language-search input {
+    width: 100%;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: #173326;
+
+    font-size: 15px;
+}
+
+
+.language-search input::placeholder {
+    color: #9aa59f;
+}
+
+
+/* LANGUAGE LIST */
+
+.language-list {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.language-item {
+    width: 100%;
+
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    border: 0;
+
+    border-radius: 14px;
+
+    background: transparent;
+
+    color: #21372b;
+
+    font-size: 16px;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+
+.language-item:hover {
+    background: #f1faf4;
+}
+
+
+.language-check {
+    color: #15a45d;
+
+    font-weight: 800;
+
+    font-size: 18px;
+}
+
+
+/* DESKTOP */
+
+@media (min-width: 700px) {
+
+    .welcome-screen {
+        padding: 50px;
+    }
+
+    .welcome-content {
+        min-height: 760px;
+    }
+
+    .wolf-circle {
+        width: 96px;
+        height: 96px;
+        font-size: 46px;
+    }
+
+    .language-screen {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+
+/* SMALL PHONES */
+
+@media (max-height: 700px) {
+
+    .welcome-content {
+        min-height: auto;
+    }
+
+    .brand-name {
+        margin-bottom: 18px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .language-button {
+        margin-top: 22px;
+    }
+
+    .continue-circle {
+        margin-top: 22px;
+    }
+}

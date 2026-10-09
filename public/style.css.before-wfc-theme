@@ -1,0 +1,584 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: #ffffff;
+    color: #111b21;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+button {
+    border: 0;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid rgba(0, 168, 132, 0.35);
+    outline-offset: 3px;
+}
+
+
+/* =========================
+   WELCOME SCREEN
+   ========================= */
+
+.welcome-screen {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding:
+        44px
+        24px
+        34px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #e9f8f3 0%,
+            #ffffff 42%
+        );
+}
+
+
+/* =========================
+   BRAND
+   ========================= */
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brand-mark {
+    width: 76px;
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e4f6ef;
+
+    font-size: 40px;
+
+    box-shadow:
+        0 8px 28px rgba(0, 168, 132, 0.12);
+}
+
+.brand-name {
+    margin-top: 12px;
+
+    color: #008f72;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    letter-spacing: -0.2px;
+}
+
+
+/* =========================
+   CONTENT
+   ========================= */
+
+.welcome-content {
+    width: 100%;
+    max-width: 430px;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 62px;
+}
+
+.welcome-copy {
+    text-align: center;
+}
+
+.welcome-copy h1 {
+    color: #111b21;
+
+    font-size: clamp(34px, 9vw, 48px);
+    line-height: 1.08;
+
+    font-weight: 750;
+
+    letter-spacing: -2px;
+}
+
+.welcome-copy p {
+    margin-top: 18px;
+
+    color: #667781;
+
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+
+/* =========================
+   ACTIONS
+   ========================= */
+
+.welcome-actions {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 38px;
+}
+
+
+/* =========================
+   LANGUAGE SELECTOR
+   ========================= */
+
+.language-selector {
+    width: 100%;
+    min-height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9e5e0;
+    border-radius: 18px;
+
+    color: #111b21;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    box-shadow:
+        0 7px 24px rgba(17, 27, 33, 0.06);
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.15s ease;
+}
+
+.language-selector:hover {
+    border-color: #b9d8ce;
+
+    box-shadow:
+        0 9px 28px rgba(17, 27, 33, 0.08);
+}
+
+.language-selector:active {
+    transform: scale(0.985);
+}
+
+.language-info {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.language-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 45px;
+
+    border-radius: 50%;
+
+    background: #e8f7f2;
+
+    font-size: 21px;
+}
+
+.language-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.language-label {
+    color: #86939a;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.1px;
+}
+
+.language-current {
+    color: #111b21;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.language-chevron {
+    color: #008f72;
+
+    font-size: 30px;
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+
+/* =========================
+   TERMS
+   ========================= */
+
+.terms {
+    max-width: 340px;
+
+    margin-top: 16px;
+
+    color: #86939a;
+
+    font-size: 11px;
+    line-height: 1.65;
+
+    text-align: center;
+}
+
+.terms a {
+    color: #008f72;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* =========================
+   GET STARTED
+   ========================= */
+
+.get-started {
+    width: 100%;
+    min-height: 66px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 27px;
+
+    padding: 0 24px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00b894 0%,
+            #008f72 100%
+        );
+
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 28px rgba(0, 143, 114, 0.22);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.get-started:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 34px rgba(0, 143, 114, 0.28);
+}
+
+.get-started:active {
+    transform: scale(0.975);
+}
+
+.start-arrow {
+    font-size: 25px;
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+
+/* =========================
+   LANGUAGE PANEL
+   HIDDEN BY DEFAULT
+   ========================= */
+
+.language-panel {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transform: translateX(100%);
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.2s ease,
+        visibility 0s linear 0.25s;
+}
+
+.language-panel.open {
+    visibility: visible;
+    opacity: 1;
+
+    transform: translateX(0);
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.2s ease;
+}
+
+.language-panel-inner {
+    width: 100%;
+    max-width: 650px;
+
+    min-height: 100%;
+
+    margin: 0 auto;
+
+    padding:
+        22px
+        22px
+        40px;
+}
+
+
+/* =========================
+   LANGUAGE HEADER
+   ========================= */
+
+.language-header {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #edf1ef;
+}
+
+.back-button {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 46px;
+
+    border-radius: 50%;
+
+    background: #e8f7f2;
+
+    color: #008f72;
+
+    font-size: 25px;
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+.language-header h2 {
+    color: #111b21;
+
+    font-size: 23px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   LANGUAGE LIST
+   ========================= */
+
+.language-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 10px;
+}
+
+.language-list button {
+    width: 100%;
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px;
+
+    background: transparent;
+
+    color: #111b21;
+
+    border-bottom: 1px solid #f0f3f2;
+
+    font-size: 16px;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.language-list button:hover {
+    background: #f1f8f5;
+}
+
+.language-list button:active {
+    background: #e7f4ef;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+
+    .welcome-screen {
+        padding:
+            34px
+            20px
+            28px;
+    }
+
+    .welcome-content {
+        padding-top: 52px;
+    }
+
+    .welcome-copy h1 {
+        font-size: 36px;
+    }
+
+    .welcome-actions {
+        margin-top: 34px;
+    }
+
+    .language-selector {
+        min-height: 72px;
+    }
+
+    .get-started {
+        min-height: 64px;
+    }
+}
+
+
+/* =========================
+   SMALL HEIGHT SCREENS
+   ========================= */
+
+@media (max-height: 680px) {
+
+    .welcome-screen {
+        padding-top: 22px;
+    }
+
+    .brand-mark {
+        width: 62px;
+        height: 62px;
+
+        font-size: 32px;
+    }
+
+    .brand-name {
+        margin-top: 8px;
+    }
+
+    .welcome-content {
+        padding-top: 32px;
+    }
+
+    .welcome-copy p {
+        margin-top: 12px;
+    }
+
+    .welcome-actions {
+        margin-top: 25px;
+    }
+
+    .language-selector {
+        min-height: 66px;
+    }
+
+    .get-started {
+        min-height: 58px;
+
+        margin-top: 20px;
+    }
+}

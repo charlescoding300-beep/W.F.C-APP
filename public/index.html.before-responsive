@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0b141a">
+    <title>W.F.C'sChat</title>
+
+    <link rel="stylesheet" href="/style.css?v=31">
+    <link rel="stylesheet" href="/wfc-global.css?v=1">
+</head>
+
+<body>
+
+<main class="welcome-screen wfc-welcome">
+
+    <!-- W.F.C'sChat branding -->
+    <header class="brand wfc-brand">
+
+        <div class="wfc-logo" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+                <circle class="logo-ring" cx="60" cy="60" r="51"></circle>
+                <circle class="logo-orbit" cx="60" cy="60" r="39"></circle>
+
+                <path
+                    class="logo-chat"
+                    d="M36 48c0-8 7-14 15-14h18c8 0 15 6 15 14v13c0 8-7 14-15 14H56l-13 9 3-10c-6-2-10-7-10-13V48Z">
+                </path>
+
+                <path
+                    class="logo-w"
+                    d="M43 49l6 19 7-14 7 14 6-19">
+                </path>
+
+                <circle class="logo-dot" cx="86" cy="28" r="5"></circle>
+            </svg>
+        </div>
+
+        <div class="brand-name">W.F.C'sChat</div>
+
+    </header>
+
+
+    <section class="welcome-content">
+
+        <!-- Animated WFC hero -->
+        <div class="wfc-hero" aria-hidden="true">
+
+            <div class="hero-glow"></div>
+
+            <div class="hero-orbit hero-orbit-one"></div>
+            <div class="hero-orbit hero-orbit-two"></div>
+
+            <div class="hero-core">
+
+                <div class="hero-core-inner">
+
+                    <svg viewBox="0 0 160 160">
+
+                        <circle
+                            cx="80"
+                            cy="80"
+                            r="57"
+                            class="hero-circle">
+                        </circle>
+
+                        <path
+                            d="M50 67c0-10 9-18 20-18h25c11 0 20 8 20 18v17c0 10-9 18-20 18H79l-16 12 4-12h-1c-9-2-16-9-16-18V67Z"
+                            class="hero-bubble">
+                        </path>
+
+                        <path
+                            d="M63 72l7 24 10-17 10 17 7-24"
+                            class="hero-w">
+                        </path>
+
+                        <circle
+                            cx="108"
+                            cy="45"
+                            r="7"
+                            class="hero-dot">
+                        </circle>
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+            <div class="hero-node hero-node-one">✦</div>
+            <div class="hero-node hero-node-two">●</div>
+            <div class="hero-node hero-node-three">⌁</div>
+
+        </div>
+
+
+        <div class="welcome-copy">
+
+            <div class="wfc-eyebrow">
+                W.F.C’sChat
+            </div>
+
+            <h1>
+                <span data-i18n="welcome">Welcome to</span><br>
+                <strong>W.F.C’sChat</strong>
+            </h1>
+
+            <p data-i18n="connect">
+                Connect with people around the world.
+            </p>
+
+        </div>
+
+
+        <div class="welcome-actions">
+
+            <!-- Language -->
+            <button
+                type="button"
+                class="language-selector"
+                id="languageSelector"
+                aria-controls="languagePanel"
+                aria-expanded="false"
+            >
+
+                <span class="language-info">
+
+                    <span
+                        class="language-icon"
+                        aria-hidden="true">
+                        🌐
+                    </span>
+
+                    <span class="language-text">
+
+                        <span
+                            class="language-label"
+                            data-i18n="language">
+                            LANGUAGE
+                        </span>
+
+                        <span
+                            class="language-current"
+                            id="currentLanguage">
+                            English
+                        </span>
+
+                    </span>
+
+                </span>
+
+                <span
+                    class="language-chevron"
+                    aria-hidden="true">
+                    ›
+                </span>
+
+            </button>
+
+
+            <!-- Terms -->
+            <p class="terms">
+
+                <span data-i18n="terms">
+                    By continuing, you agree to
+                </span>
+
+                <a
+                    href="#"
+                    data-i18n="termsLink">
+                    Terms &amp; Conditions
+                </a>
+
+                <span>and</span>
+
+                <a
+                    href="#"
+                    data-i18n="privacy">
+                    Privacy Policy
+                </a>.
+
+            </p>
+
+
+            <!-- Real WFC start button -->
+            <button
+                type="button"
+                class="get-started"
+                id="getStarted"
+            >
+
+                <span data-i18n="getStarted">
+                    Get started
+                </span>
+
+                <span
+                    class="start-arrow"
+                    aria-hidden="true">
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Language panel -->
+
+<section
+    class="language-panel"
+    id="languagePanel"
+    aria-hidden="true"
+>
+
+    <div class="language-panel-inner">
+
+        <header class="language-header">
+
+            <button
+                type="button"
+                class="back-button"
+                id="closeLanguage"
+                aria-label="Back"
+                data-i18n-aria-label="back"
+            >
+                ←
+            </button>
+
+            <h2 data-i18n="selectLanguage">
+                Select language
+            </h2>
+
+        </header>
+
+
+        <div class="language-list">
+
+            <button type="button" data-language="English">
+                English
+            </button>
+
+            <button type="button" data-language="Français">
+                Français
+            </button>
+
+            <button type="button" data-language="Español">
+                Español
+            </button>
+
+            <button type="button" data-language="Português">
+                Português
+            </button>
+
+            <button type="button" data-language="Deutsch">
+                Deutsch
+            </button>
+
+            <button type="button" data-language="Italiano">
+                Italiano
+            </button>
+
+            <button type="button" data-language="Nederlands">
+                Nederlands
+            </button>
+
+            <button type="button" data-language="Türkçe">
+                Türkçe
+            </button>
+
+            <button type="button" data-language="العربية">
+                العربية
+            </button>
+
+            <button type="button" data-language="हिन्दी">
+                हिन्दी
+            </button>
+
+            <button type="button" data-language="বাংলা">
+                বাংলা
+            </button>
+
+            <button type="button" data-language="中文">
+                中文
+            </button>
+
+            <button type="button" data-language="日本語">
+                日本語
+            </button>
+
+            <button type="button" data-language="한국어">
+                한국어
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script src="/wfc-language.js?v=3"></script>
+<script src="/i18n.js?v=2"></script>
+<script src="/welcome.js?v=32"></script>
+
+</body>
+</html>

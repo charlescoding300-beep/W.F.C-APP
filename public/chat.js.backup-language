@@ -1,0 +1,110 @@
+(() => {
+    "use strict";
+
+    const languageButton = document.getElementById("languageButton");
+    const languagePanel = document.getElementById("languagePanel");
+    const closeLanguage = document.getElementById("closeLanguage");
+    const languageList = document.getElementById("languageList");
+
+    const languages = [
+        ["en", "English"],
+        ["fr", "Français"],
+        ["es", "Español"],
+        ["pt", "Português"],
+        ["de", "Deutsch"],
+        ["it", "Italiano"],
+        ["nl", "Nederlands"],
+        ["tr", "Türkçe"],
+        ["ar", "العربية"],
+        ["hi", "हिन्दी"],
+        ["bn", "বাংলা"],
+        ["zh", "中文"],
+        ["ja", "日本語"],
+        ["ko", "한국어"]
+    ];
+
+    function openLanguages() {
+        languagePanel.classList.add("open");
+        languagePanel.setAttribute("aria-hidden", "false");
+        renderLanguages();
+    }
+
+    function closeLanguages() {
+        languagePanel.classList.remove("open");
+        languagePanel.setAttribute("aria-hidden", "true");
+    }
+
+    function renderLanguages() {
+        if (!window.WFC_I18N) return;
+
+        const current = window.WFC_I18N.getLanguage();
+
+        languageList.innerHTML = languages.map(([code, name]) => `
+            <button
+                type="button"
+                class="language-option ${code === current ? "selected" : ""}"
+                data-language="${code}">
+                ${name}
+            </button>
+        `).join("");
+
+        languageList.querySelectorAll("[data-language]").forEach(button => {
+            button.addEventListener("click", () => {
+                window.WFC_I18N.setLanguage(button.dataset.language);
+                renderLanguages();
+            });
+        });
+    }
+
+    languageButton.addEventListener("click", openLanguages);
+    closeLanguage.addEventListener("click", closeLanguages);
+
+    languagePanel.addEventListener("click", event => {
+        if (event.target === languagePanel) {
+            closeLanguages();
+        }
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            closeLanguages();
+        }
+    });
+
+    window.addEventListener("wfc-language-change", () => {
+        renderLanguages();
+    });
+
+    document.querySelectorAll(".chat-tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+            document.querySelectorAll(".chat-tab")
+                .forEach(item => item.classList.remove("active"));
+
+            tab.classList.add("active");
+        });
+    });
+
+    document.getElementById("newChatButton")
+        .addEventListener("click", () => {
+            alert(window.WFC_I18N
+                ? window.WFC_I18N.t("startChat")
+                : "Start a chat");
+        });
+
+    document.getElementById("floatingNewChat")
+        .addEventListener("click", () => {
+            document.getElementById("newChatButton").click();
+        });
+
+    document.getElementById("settingsButton")
+        .addEventListener("click", () => {
+            alert(window.WFC_I18N
+                ? window.WFC_I18N.t("settings")
+                : "Settings");
+        });
+
+    if (window.WFC_I18N) {
+        window.WFC_I18N.apply();
+        renderLanguages();
+    }
+})();

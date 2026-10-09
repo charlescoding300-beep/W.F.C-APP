@@ -1,0 +1,418 @@
+(() => {
+    "use strict";
+
+    const STORAGE_KEY = "wfc_language";
+
+    const translations = {
+
+        en: {
+            name: "English",
+            welcome: "Welcome to",
+            connect: "Connect with people around the world.",
+            language: "LANGUAGE",
+            selectLanguage: "Select language",
+            terms: "By continuing, you agree to",
+            termsLink: "Terms & Conditions",
+            privacy: "Privacy Policy",
+            getStarted: "Get started",
+            back: "Back",
+
+            phoneTitle: "Enter your phone number",
+            phoneDescription: "Select your country and enter your phone number.",
+            phonePlaceholder: "Phone number",
+            continue: "Continue",
+            sendingCode: "Sending code...",
+            enterPhone: "Enter your phone number.",
+            selectCountry: "Select country",
+            searchCountry: "Search country",
+            noCountries: "No countries found.",
+            security: "Your phone number is used to create and secure your W.F.C'sChat account."
+        },
+
+        fr: {
+            name: "Français",
+            welcome: "Bienvenue sur",
+            connect: "Connectez-vous avec des personnes du monde entier.",
+            language: "LANGUE",
+            selectLanguage: "Choisir la langue",
+            terms: "En continuant, vous acceptez les",
+            termsLink: "Conditions d'utilisation",
+            privacy: "Politique de confidentialité",
+            getStarted: "Commencer",
+            back: "Retour",
+
+            phoneTitle: "Entrez votre numéro de téléphone",
+            phoneDescription: "Sélectionnez votre pays et entrez votre numéro de téléphone.",
+            phonePlaceholder: "Numéro de téléphone",
+            continue: "Continuer",
+            sendingCode: "Envoi du code...",
+            enterPhone: "Entrez votre numéro de téléphone.",
+            selectCountry: "Sélectionner un pays",
+            searchCountry: "Rechercher un pays",
+            noCountries: "Aucun pays trouvé.",
+            security: "Votre numéro de téléphone est utilisé pour créer et sécuriser votre compte W.F.C'sChat."
+        },
+
+        es: {
+            name: "Español",
+            welcome: "Bienvenido a",
+            connect: "Conecta con personas de todo el mundo.",
+            language: "IDIOMA",
+            selectLanguage: "Seleccionar idioma",
+            terms: "Al continuar, aceptas los",
+            termsLink: "Términos y condiciones",
+            privacy: "Política de privacidad",
+            getStarted: "Comenzar",
+            back: "Atrás",
+
+            phoneTitle: "Introduce tu número de teléfono",
+            phoneDescription: "Selecciona tu país e introduce tu número de teléfono.",
+            phonePlaceholder: "Número de teléfono",
+            continue: "Continuar",
+            sendingCode: "Enviando código...",
+            enterPhone: "Introduce tu número de teléfono.",
+            selectCountry: "Seleccionar país",
+            searchCountry: "Buscar país",
+            noCountries: "No se encontraron países.",
+            security: "Tu número de teléfono se utiliza para crear y proteger tu cuenta de W.F.C'sChat."
+        },
+
+        pt: {
+            name: "Português",
+            welcome: "Bem-vindo ao",
+            connect: "Conecte-se com pessoas de todo o mundo.",
+            language: "IDIOMA",
+            selectLanguage: "Selecionar idioma",
+            terms: "Ao continuar, você concorda com os",
+            termsLink: "Termos e condições",
+            privacy: "Política de privacidade",
+            getStarted: "Começar",
+            back: "Voltar",
+
+            phoneTitle: "Digite seu número de telefone",
+            phoneDescription: "Selecione seu país e digite seu número de telefone.",
+            phonePlaceholder: "Número de telefone",
+            continue: "Continuar",
+            sendingCode: "Enviando código...",
+            enterPhone: "Digite seu número de telefone.",
+            selectCountry: "Selecionar país",
+            searchCountry: "Pesquisar país",
+            noCountries: "Nenhum país encontrado.",
+            security: "Seu número de telefone é usado para criar e proteger sua conta W.F.C'sChat."
+        },
+
+        de: {
+            name: "Deutsch",
+            welcome: "Willkommen bei",
+            connect: "Verbinde dich mit Menschen auf der ganzen Welt.",
+            language: "SPRACHE",
+            selectLanguage: "Sprache auswählen",
+            terms: "Mit dem Fortfahren stimmst du den",
+            termsLink: "Nutzungsbedingungen",
+            privacy: "Datenschutzbestimmungen",
+            getStarted: "Loslegen",
+            back: "Zurück",
+
+            phoneTitle: "Gib deine Telefonnummer ein",
+            phoneDescription: "Wähle dein Land und gib deine Telefonnummer ein.",
+            phonePlaceholder: "Telefonnummer",
+            continue: "Weiter",
+            sendingCode: "Code wird gesendet...",
+            enterPhone: "Gib deine Telefonnummer ein.",
+            selectCountry: "Land auswählen",
+            searchCountry: "Land suchen",
+            noCountries: "Keine Länder gefunden.",
+            security: "Deine Telefonnummer wird verwendet, um dein W.F.C'sChat-Konto zu erstellen und zu schützen."
+        },
+
+        it: {
+            name: "Italiano",
+            welcome: "Benvenuto su",
+            connect: "Connettiti con persone di tutto il mondo.",
+            language: "LINGUA",
+            selectLanguage: "Seleziona lingua",
+            terms: "Continuando, accetti i",
+            termsLink: "Termini e condizioni",
+            privacy: "Informativa sulla privacy",
+            getStarted: "Inizia",
+            back: "Indietro",
+
+            phoneTitle: "Inserisci il tuo numero di telefono",
+            phoneDescription: "Seleziona il tuo paese e inserisci il tuo numero di telefono.",
+            phonePlaceholder: "Numero di telefono",
+            continue: "Continua",
+            sendingCode: "Invio del codice...",
+            enterPhone: "Inserisci il tuo numero di telefono.",
+            selectCountry: "Seleziona paese",
+            searchCountry: "Cerca paese",
+            noCountries: "Nessun paese trovato.",
+            security: "Il tuo numero di telefono viene utilizzato per creare e proteggere il tuo account W.F.C'sChat."
+        },
+
+        nl: {
+            name: "Nederlands",
+            welcome: "Welkom bij",
+            connect: "Maak verbinding met mensen over de hele wereld.",
+            language: "TAAL",
+            selectLanguage: "Taal selecteren",
+            terms: "Door verder te gaan ga je akkoord met de",
+            termsLink: "Algemene voorwaarden",
+            privacy: "Privacybeleid",
+            getStarted: "Aan de slag",
+            back: "Terug",
+
+            phoneTitle: "Voer je telefoonnummer in",
+            phoneDescription: "Selecteer je land en voer je telefoonnummer in.",
+            phonePlaceholder: "Telefoonnummer",
+            continue: "Doorgaan",
+            sendingCode: "Code wordt verzonden...",
+            enterPhone: "Voer je telefoonnummer in.",
+            selectCountry: "Land selecteren",
+            searchCountry: "Land zoeken",
+            noCountries: "Geen landen gevonden.",
+            security: "Je telefoonnummer wordt gebruikt om je W.F.C'sChat-account te maken en te beveiligen."
+        },
+
+        tr: {
+            name: "Türkçe",
+            welcome: "W.F.C'sChat'e Hoş Geldiniz",
+            connect: "Dünyanın dört bir yanından insanlarla bağlantı kurun.",
+            language: "DİL",
+            selectLanguage: "Dil seç",
+            terms: "Devam ederek",
+            termsLink: "Şartlar ve Koşullar",
+            privacy: "Gizlilik Politikası'nı",
+            getStarted: "Başla",
+            back: "Geri",
+
+            phoneTitle: "Telefon numaranızı girin",
+            phoneDescription: "Ülkenizi seçin ve telefon numaranızı girin.",
+            phonePlaceholder: "Telefon numarası",
+            continue: "Devam",
+            sendingCode: "Kod gönderiliyor...",
+            enterPhone: "Telefon numaranızı girin.",
+            selectCountry: "Ülke seç",
+            searchCountry: "Ülke ara",
+            noCountries: "Ülke bulunamadı.",
+            security: "Telefon numaranız W.F.C'sChat hesabınızı oluşturmak ve güvence altına almak için kullanılır."
+        },
+
+        ar: {
+            name: "العربية",
+            welcome: "مرحبًا بك في",
+            connect: "تواصل مع أشخاص من جميع أنحاء العالم.",
+            language: "اللغة",
+            selectLanguage: "اختيار اللغة",
+            terms: "بالمتابعة، أنت توافق على",
+            termsLink: "الشروط والأحكام",
+            privacy: "سياسة الخصوصية",
+            getStarted: "ابدأ",
+            back: "رجوع",
+
+            phoneTitle: "أدخل رقم هاتفك",
+            phoneDescription: "اختر بلدك وأدخل رقم هاتفك.",
+            phonePlaceholder: "رقم الهاتف",
+            continue: "متابعة",
+            sendingCode: "جارٍ إرسال الرمز...",
+            enterPhone: "أدخل رقم هاتفك.",
+            selectCountry: "اختر الدولة",
+            searchCountry: "البحث عن دولة",
+            noCountries: "لم يتم العثور على دول.",
+            security: "يُستخدم رقم هاتفك لإنشاء حساب W.F.C'sChat وتأمينه."
+        },
+
+        hi: {
+            name: "हिन्दी",
+            welcome: "W.F.C'sChat में आपका स्वागत है",
+            connect: "दुनिया भर के लोगों से जुड़ें।",
+            language: "भाषा",
+            selectLanguage: "भाषा चुनें",
+            terms: "जारी रखकर, आप सहमत होते हैं",
+            termsLink: "नियम और शर्तें",
+            privacy: "गोपनीयता नीति",
+            getStarted: "शुरू करें",
+            back: "वापस",
+
+            phoneTitle: "अपना फ़ोन नंबर दर्ज करें",
+            phoneDescription: "अपना देश चुनें और फ़ोन नंबर दर्ज करें।",
+            phonePlaceholder: "फ़ोन नंबर",
+            continue: "जारी रखें",
+            sendingCode: "कोड भेजा जा रहा है...",
+            enterPhone: "अपना फ़ोन नंबर दर्ज करें।",
+            selectCountry: "देश चुनें",
+            searchCountry: "देश खोजें",
+            noCountries: "कोई देश नहीं मिला।",
+            security: "आपके W.F.C'sChat खाते को बनाने और सुरक्षित रखने के लिए आपके फ़ोन नंबर का उपयोग किया जाता है।"
+        },
+
+        bn: {
+            name: "বাংলা",
+            welcome: "W.F.C'sChat-এ স্বাগতম",
+            connect: "সারা বিশ্বের মানুষের সাথে যোগাযোগ করুন।",
+            language: "ভাষা",
+            selectLanguage: "ভাষা নির্বাচন করুন",
+            terms: "চালিয়ে গেলে আপনি সম্মত হচ্ছেন",
+            termsLink: "শর্তাবলীতে",
+            privacy: "গোপনীয়তা নীতিতে",
+            getStarted: "শুরু করুন",
+            back: "ফিরে যান",
+
+            phoneTitle: "আপনার ফোন নম্বর লিখুন",
+            phoneDescription: "আপনার দেশ নির্বাচন করে ফোন নম্বর লিখুন।",
+            phonePlaceholder: "ফোন নম্বর",
+            continue: "চালিয়ে যান",
+            sendingCode: "কোড পাঠানো হচ্ছে...",
+            enterPhone: "আপনার ফোন নম্বর লিখুন।",
+            selectCountry: "দেশ নির্বাচন করুন",
+            searchCountry: "দেশ খুঁজুন",
+            noCountries: "কোনো দেশ পাওয়া যায়নি।",
+            security: "আপনার W.F.C'sChat অ্যাকাউন্ট তৈরি ও সুরক্ষিত রাখতে আপনার ফোন নম্বর ব্যবহার করা হয়।"
+        },
+
+        zh: {
+            name: "中文",
+            welcome: "欢迎使用",
+            connect: "与世界各地的人建立联系。",
+            language: "语言",
+            selectLanguage: "选择语言",
+            terms: "继续即表示您同意",
+            termsLink: "条款和条件",
+            privacy: "隐私政策",
+            getStarted: "开始使用",
+            back: "返回",
+
+            phoneTitle: "输入您的电话号码",
+            phoneDescription: "选择您的国家/地区并输入电话号码。",
+            phonePlaceholder: "电话号码",
+            continue: "继续",
+            sendingCode: "正在发送验证码...",
+            enterPhone: "请输入您的电话号码。",
+            selectCountry: "选择国家/地区",
+            searchCountry: "搜索国家/地区",
+            noCountries: "未找到国家/地区。",
+            security: "您的电话号码用于创建和保护您的 W.F.C'sChat 帐户。"
+        },
+
+        ja: {
+            name: "日本語",
+            welcome: "W.F.C'sChatへようこそ",
+            connect: "世界中の人々とつながりましょう。",
+            language: "言語",
+            selectLanguage: "言語を選択",
+            terms: "続行すると、以下に同意したものとみなされます：",
+            termsLink: "利用規約",
+            privacy: "プライバシーポリシー",
+            getStarted: "始める",
+            back: "戻る",
+
+            phoneTitle: "電話番号を入力",
+            phoneDescription: "国を選択して電話番号を入力してください。",
+            phonePlaceholder: "電話番号",
+            continue: "続行",
+            sendingCode: "コードを送信中...",
+            enterPhone: "電話番号を入力してください。",
+            selectCountry: "国を選択",
+            searchCountry: "国を検索",
+            noCountries: "国が見つかりません。",
+            security: "電話番号はW.F.C'sChatアカウントの作成と保護に使用されます。"
+        },
+
+        ko: {
+            name: "한국어",
+            welcome: "W.F.C'sChat에 오신 것을 환영합니다",
+            connect: "전 세계 사람들과 연결하세요.",
+            language: "언어",
+            selectLanguage: "언어 선택",
+            terms: "계속하면 다음에 동의하는 것으로 간주됩니다:",
+            termsLink: "이용약관",
+            privacy: "개인정보 보호정책",
+            getStarted: "시작하기",
+            back: "뒤로",
+
+            phoneTitle: "전화번호를 입력하세요",
+            phoneDescription: "국가를 선택하고 전화번호를 입력하세요.",
+            phonePlaceholder: "전화번호",
+            continue: "계속",
+            sendingCode: "코드 전송 중...",
+            enterPhone: "전화번호를 입력하세요.",
+            selectCountry: "국가 선택",
+            searchCountry: "국가 검색",
+            noCountries: "국가를 찾을 수 없습니다.",
+            security: "전화번호는 W.F.C'sChat 계정을 만들고 보호하는 데 사용됩니다."
+        }
+    };
+
+    function getLanguage() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (saved && translations[saved]) {
+            return saved;
+        }
+
+        return "en";
+    }
+
+    function setLanguage(language) {
+        if (!translations[language]) {
+            return;
+        }
+
+        localStorage.setItem(STORAGE_KEY, language);
+
+        document.documentElement.lang = language;
+
+        if (language === "ar") {
+            document.documentElement.dir = "rtl";
+        } else {
+            document.documentElement.dir = "ltr";
+        }
+
+        window.WFC_LANGUAGE = language;
+        window.WFC_TRANSLATIONS = translations[language];
+
+        window.dispatchEvent(
+            new CustomEvent("wfc-language-change", {
+                detail: {
+                    language,
+                    translations: translations[language]
+                }
+            })
+        );
+    }
+
+    function t(key) {
+        const language = getLanguage();
+        return translations[language]?.[key]
+            ?? translations.en[key]
+            ?? key;
+    }
+
+    function apply() {
+        setLanguage(getLanguage());
+
+        document.querySelectorAll("[data-i18n]").forEach(element => {
+            const key = element.dataset.i18n;
+            element.textContent = t(key);
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+            const key = element.dataset.i18nPlaceholder;
+            element.placeholder = t(key);
+        });
+
+        document.querySelectorAll("[data-i18n-aria-label]").forEach(element => {
+            const key = element.dataset.i18nAriaLabel;
+            element.setAttribute("aria-label", t(key));
+        });
+    }
+
+    window.WFC_I18N = {
+        translations,
+        getLanguage,
+        setLanguage,
+        t,
+        apply
+    };
+
+    document.addEventListener("DOMContentLoaded", apply);
+})();

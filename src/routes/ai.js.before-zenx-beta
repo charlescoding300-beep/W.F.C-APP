@@ -1,0 +1,309 @@
+const express = require('express');
+
+const db = require('../database/db');
+const { requireAuth } = require('../middleware/auth');
+
+const router = express.Router();
+
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+
+const AI_NAME = 'WFC AI';
+
+function getOrCreateAIChat(userId) {
+    const existing = db.prepare(`
+        SELECT c.id
+        FROM chats c
+        INNER JOIN chat_members cm
+            ON cm.chat_id = c.id
+        WHERE c.type = 'ai'
+          AND cm.user_id = ?
+        LIMIT 1
+    `).get(userId);
+
+    if (existing) {
+        return existing.id;
+    }
+
+    const create = db.transaction(() => {
+        const result = db.prepare(`
+            INSERT INTO chats (
+                type,
+                name
+            )
+            VALUES ('ai', ?)
+        `).run(AI_NAME);
+
+        const chatId = result.lastInsertRowid;
+
+        db.prepare(`
+            INSERT INTO chat_members (
+                chat_id,
+                user_id
+            )
+            VALUES (?, ?)
+        `).run(chatId, userId);
+
+        return chatId;
+    });
+
+    return create();
+}
+
+/*
+ * GET /api/v1/ai/chat
+ *
+ * Get or create the user's WFC AI conversation.
+ */
+router.get('/chat', requireAuth, (req, res) => {
+    const userId = req.user.userId;
+    const chatId = getOrCreateAIChat(userId);
+
+    const chat = db.prepare(`
+        SELECT
+            id,
+            type,
+            name,
+            picture,
+            created_at,
+            updated_at
+        FROM chats
+        WHERE id = ?
+    `).get(chatId);
+
+    res.json({
+        success: true,
+        chat
+    });
+});
+
+/*
+ * POST /api/v1/ai/chat
+ *
+ * Send a message to WFC AI.
+ */
+router.post('/chat', requireAuth, async (req, res) => {
+    const userId = req.user.userId;
+
+    const message =
+        typeof req.body?.message === 'string'
+            ? req.body.message.trim()
+            : '';
+
+    if (!message) {
+        return res.status(400).json({
+            success: false,
+            error: {
+                code: 'EMPTY_MESSAGE',
+                message: 'Message cannot be empty'
+            }
+        });
+    }
+
+    if (message.length > 5000) {
+        return res.status(400).json({
+            success: false,
+            error: {
+                code: 'MESSAGE_TOO_LONG',
+                message: 'Message is too long'
+            }
+        });
+    }
+
+    if (!GEMINI_API_KEY) {
+        return res.status(503).json({
+            success: false,
+            error: {
+                code: 'AI_NOT_CONFIGURED',
+                message: 'WFC AI is not configured yet'
+            }
+        });
+    }
+
+    const chatId = getOrCreateAIChat(userId);
+
+    /*
+     * Save the user's message.
+     */
+    db.prepare(`
+        INSERT INTO messages (
+            chat_id,
+            sender_id,
+            message_type,
+            body,
+            is_read
+        )
+        VALUES (?, ?, 'text', ?, 1)
+    `).run(
+        chatId,
+        userId,
+        message
+    );
+
+    db.prepare(`
+        UPDATE chats
+        SET updated_at = CURRENT_TIMESTAMP
+        WHERE id = ?
+    `).run(chatId);
+
+    /*
+     * Get recent conversation history.
+     */
+    const history = db.prepare(`
+        SELECT
+            message_type,
+            body
+        FROM messages
+        WHERE chat_id = ?
+          AND body IS NOT NULL
+        ORDER BY id DESC
+        LIMIT 30
+    `).all(chatId).reverse();
+
+    /*
+     * Gemini expects:
+     * user      -> user
+     * AI reply  -> model
+     */
+    const contents = history.map(item => ({
+        role: item.message_type === 'ai'
+            ? 'model'
+            : 'user',
+        parts: [
+            {
+                text: item.body
+            }
+        ]
+    }));
+
+    try {
+        const url =
+            `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(GEMINI_MODEL)}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                systemInstruction: {
+                    parts: [
+                        {
+                            text:
+                                'You are WFC AI, the built-in AI assistant inside W.F.C’sChat. ' +
+                                'Be helpful, friendly, clear and concise. ' +
+                                'You are part of the WFC social messaging application. ' +
+                                'Never pretend to be a human.'
+                        }
+                    ]
+                },
+
+                contents,
+
+                generationConfig: {
+                    maxOutputTokens: 1200,
+                    temperature: 0.7
+                }
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('[WFC AI] Gemini error:', data);
+
+            return res.status(502).json({
+                success: false,
+                error: {
+                    code: 'AI_PROVIDER_ERROR',
+                    message: 'WFC AI could not generate a response'
+                }
+            });
+        }
+
+        const aiText =
+            data?.candidates?.[0]?.content?.parts
+                ?.map(part => part.text || '')
+                .join('')
+                .trim();
+
+        if (!aiText) {
+            console.error(
+                '[WFC AI] Gemini returned no text:',
+                data
+            );
+
+            return res.status(502).json({
+                success: false,
+                error: {
+                    code: 'AI_EMPTY_RESPONSE',
+                    message: 'WFC AI returned an empty response'
+                }
+            });
+        }
+
+        /*
+         * Store AI response.
+         *
+         * sender_id remains the authenticated user because
+         * the current messages table requires sender_id.
+         * message_type='ai' identifies the AI message.
+         */
+        const result = db.prepare(`
+            INSERT INTO messages (
+                chat_id,
+                sender_id,
+                message_type,
+                body,
+                is_read
+            )
+            VALUES (?, ?, 'ai', ?, 1)
+        `).run(
+            chatId,
+            userId,
+            aiText
+        );
+
+        db.prepare(`
+            UPDATE chats
+            SET updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+        `).run(chatId);
+
+        const aiMessage = db.prepare(`
+            SELECT
+                id,
+                chat_id,
+                sender_id,
+                message_type,
+                body,
+                media_url,
+                reply_to,
+                is_read,
+                created_at
+            FROM messages
+            WHERE id = ?
+        `).get(result.lastInsertRowid);
+
+        res.status(201).json({
+            success: true,
+            chat_id: chatId,
+            message: aiMessage
+        });
+
+    } catch (error) {
+        console.error('[WFC AI] Request failed:', error);
+
+        res.status(502).json({
+            success: false,
+            error: {
+                code: 'AI_REQUEST_FAILED',
+                message: 'Unable to contact WFC AI'
+            }
+        });
+    }
+});
+
+module.exports = router;

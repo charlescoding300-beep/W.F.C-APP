@@ -1,0 +1,417 @@
+/*
+ * WFC VERIFICATION SCREEN
+ * Development Step 1
+ */
+
+:root {
+    --wfc-bg: #0b141a;
+    --wfc-surface: #111b21;
+    --wfc-surface-2: #202c33;
+    --wfc-text: #e9edef;
+    --wfc-muted: #8696a0;
+    --wfc-green: #00a884;
+    --wfc-green-bright: #00c896;
+    --wfc-error: #ff6b6b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    background: var(--wfc-bg);
+}
+
+body {
+    color: var(--wfc-text);
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.verify-screen {
+    min-height: 100dvh;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(0, 168, 132, 0.08),
+            transparent 34%
+        ),
+        var(--wfc-bg);
+
+    display: flex;
+    flex-direction: column;
+
+    padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+}
+
+.verify-header {
+    height: 56px;
+    min-height: 56px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 18px;
+
+    border-bottom: 1px solid rgba(134, 150, 160, 0.10);
+
+    background: rgba(11, 20, 26, 0.96);
+
+    position: relative;
+}
+
+.back-button {
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: transparent;
+    color: var(--wfc-text);
+
+    display: grid;
+    place-items: center;
+
+    font-size: 25px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background: rgba(134, 150, 160, 0.12);
+}
+
+.brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    white-space: nowrap;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    color: var(--wfc-text);
+}
+
+.brand-wolf {
+    font-size: 21px;
+}
+
+.verify-content {
+    width: min(100%, 460px);
+
+    margin: 0 auto;
+
+    padding:
+        58px 24px
+        calc(48px + env(safe-area-inset-bottom));
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+.verify-icon {
+    width: 66px;
+    height: 66px;
+
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 24px;
+
+    background: rgba(0, 168, 132, 0.12);
+
+    border: 1px solid rgba(0, 168, 132, 0.28);
+
+    color: var(--wfc-green-bright);
+
+    font-size: 31px;
+    font-weight: 700;
+
+    box-shadow:
+        0 0 0 8px rgba(0, 168, 132, 0.035),
+        0 12px 40px rgba(0, 0, 0, 0.22);
+}
+
+.verify-content h1 {
+    margin: 0;
+
+    color: var(--wfc-text);
+
+    font-size: clamp(25px, 6vw, 31px);
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.verify-description {
+    max-width: 360px;
+
+    margin: 14px auto 0;
+
+    color: var(--wfc-muted);
+
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.phone-display {
+    margin-top: 24px;
+
+    min-height: 42px;
+    padding: 9px 18px;
+
+    display: inline-flex;
+    align-items: center;
+
+    border-radius: 21px;
+
+    background: var(--wfc-surface-2);
+
+    color: var(--wfc-text);
+
+    font-size: 16px;
+    font-weight: 500;
+
+    letter-spacing: 0.03em;
+}
+
+.change-number {
+    margin-top: 9px;
+
+    border: 0;
+    background: transparent;
+
+    color: var(--wfc-green-bright);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.code-area {
+    width: min(100%, 320px);
+
+    margin-top: 36px;
+
+    text-align: left;
+}
+
+.code-area label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--wfc-muted);
+
+    font-size: 13px;
+}
+
+.verification-code {
+    width: 100%;
+    height: 58px;
+
+    border: 0;
+    border-bottom: 2px solid rgba(134, 150, 160, 0.45);
+    border-radius: 0;
+
+    outline: none;
+
+    background: transparent;
+
+    color: var(--wfc-text);
+
+    text-align: center;
+
+    font-size: 25px;
+    font-weight: 500;
+
+    letter-spacing: 0.30em;
+
+    transition:
+        border-color 160ms ease,
+        box-shadow 160ms ease;
+}
+
+.verification-code::placeholder {
+    color: #667781;
+    opacity: 0.8;
+}
+
+.verification-code:focus {
+    border-bottom-color: var(--wfc-green);
+    box-shadow: 0 5px 0 -3px var(--wfc-green);
+}
+
+.verify-error {
+    width: min(100%, 320px);
+
+    min-height: 22px;
+
+    margin: 14px 0 0;
+
+    color: var(--wfc-error);
+
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.verify-button {
+    width: min(100%, 320px);
+    min-height: 50px;
+
+    margin-top: 20px;
+
+    border: 0;
+    border-radius: 25px;
+
+    background: var(--wfc-green);
+
+    color: #07140f;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 120ms ease,
+        opacity 160ms ease,
+        background 160ms ease;
+}
+
+.verify-button:hover:not(:disabled) {
+    background: var(--wfc-green-bright);
+}
+
+.verify-button:active:not(:disabled) {
+    transform: scale(0.985);
+}
+
+.verify-button:disabled {
+    background: #233138;
+    color: #667781;
+    cursor: not-allowed;
+}
+
+.verify-help {
+    margin-top: 32px;
+
+    color: var(--wfc-muted);
+
+    font-size: 14px;
+}
+
+.verify-help p {
+    margin: 0 0 9px;
+}
+
+.resend-button {
+    border: 0;
+    background: transparent;
+
+    color: var(--wfc-green-bright);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.resend-button:disabled {
+    color: #667781;
+    cursor: not-allowed;
+}
+
+#resendTimer {
+    margin-left: 4px;
+}
+
+@media (max-width: 600px) {
+    .verify-content {
+        padding-top: 44px;
+    }
+
+    .verify-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 28px;
+    }
+
+    .verify-content h1 {
+        font-size: 25px;
+    }
+
+    .verification-code {
+        height: 55px;
+        font-size: 23px;
+    }
+}
+
+@media (pointer: coarse) {
+    .back-button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .change-number,
+    .resend-button {
+        min-height: 44px;
+    }
+
+    .verify-button {
+        min-height: 52px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}

@@ -1,0 +1,287 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100%;
+    margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: .65;
+}
+
+[aria-busy="true"] {
+    pointer-events: none;
+}
+
+.wfc-hidden {
+    display: none !important;
+}
+
+.wfc-loading {
+    opacity: .65;
+    pointer-events: none;
+}
+
+html[dir="rtl"] {
+    direction: rtl;
+}
+
+/* =========================================================
+   WFC RESPONSIVE DEVICE FOUNDATION
+   Additive only — preserves existing WFC layouts
+========================================================= */
+
+:root {
+    --wfc-safe-top: env(safe-area-inset-top, 0px);
+    --wfc-safe-right: env(safe-area-inset-right, 0px);
+    --wfc-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --wfc-safe-left: env(safe-area-inset-left, 0px);
+}
+
+/* Modern mobile viewport behavior */
+html {
+    width: 100%;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overscroll-behavior-x: none;
+}
+
+body {
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Make controls feel native on touch devices */
+button,
+a,
+input,
+textarea,
+select {
+    touch-action: manipulation;
+}
+
+/* Prevent accidental text selection on UI controls */
+button,
+[role="button"],
+.wfc-button {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Respect devices with a notch / home indicator */
+.wfc-safe-area {
+    padding-top: var(--wfc-safe-top);
+    padding-right: var(--wfc-safe-right);
+    padding-bottom: var(--wfc-safe-bottom);
+    padding-left: var(--wfc-safe-left);
+}
+
+/* Dynamic viewport support */
+.wfc-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* Touchscreen devices get comfortable tap targets */
+@media (pointer: coarse) {
+    button,
+    [role="button"] {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* Prevent horizontal layout breakage on narrow phones */
+@media (max-width: 480px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 1024px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+    html,
+    body {
+        min-height: 100dvh;
+    }
+}
+
+/* Respect users who disable animation */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =========================================================
+   WFC APP-SCREEN RESPONSIVE SIZING
+========================================================= */
+
+/*
+ * Use the real visible viewport on modern mobile browsers.
+ * 100dvh adapts when the browser address bar / keyboard changes.
+ */
+.phone-screen,
+.chat-app,
+.chat-screen,
+.conversation-screen,
+.new-chat-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* Phone and chat should never become wider than the device. */
+.phone-screen,
+.chat-app {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 390px) {
+    .phone-screen,
+    .chat-app {
+        width: 100%;
+        min-width: 0;
+    }
+
+    body {
+        font-size: 15px;
+    }
+}
+
+/* =========================================================
+   NORMAL PHONES
+========================================================= */
+
+@media (min-width: 391px) and (max-width: 600px) {
+    .phone-screen,
+    .chat-app {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* =========================================================
+   TABLETS
+========================================================= */
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .phone-screen,
+    .chat-app {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1025px) {
+    .phone-screen,
+    .chat-app {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+}
+
+/* =========================================================
+   IPHONE / IPAD SAFE AREAS
+========================================================= */
+
+@supports (padding: env(safe-area-inset-top)) {
+    .phone-screen,
+    .chat-app {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+}
+
+/* =========================================================
+   TOUCH DEVICES
+========================================================= */
+
+@media (pointer: coarse) {
+    button,
+    input,
+    textarea,
+    select,
+    a {
+        touch-action: manipulation;
+    }
+}
+
+/* =========================================================
+   MOBILE LANDSCAPE
+========================================================= */
+
+@media (max-height: 520px) and (orientation: landscape) {
+    .phone-screen,
+    .chat-app,
+    .chat-screen {
+        min-height: 100dvh;
+        height: 100dvh;
+    }
+}
+
+/* =========================================================
+   PREVENT MOBILE HORIZONTAL OVERFLOW
+========================================================= */
+
+@media (max-width: 1024px) {
+    html,
+    body {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    img,
+    video,
+    canvas,
+    svg {
+        max-width: 100%;
+    }
+}

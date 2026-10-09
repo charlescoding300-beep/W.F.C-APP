@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00a884">
+    <title>W.F.C'sChat</title>
+
+    <link rel="stylesheet" href="/wfc-global.css?v=1">
+    <link rel="stylesheet" href="/chat.css?v=1">
+</head>
+
+<body class="chat-page">
+
+    <main class="chat-app">
+
+        <header class="chat-topbar">
+            <div class="chat-brand">
+                <div class="chat-logo">🐺</div>
+                <div>
+                    <strong>W.F.C'sChat</strong>
+                    <span id="chatUserName">W.F.C'sChat</span>
+                </div>
+            </div>
+
+            <div class="chat-actions">
+                <button id="languageButton"
+                        type="button"
+                        class="icon-button"
+                        aria-label="Language">
+                    🌐
+                </button>
+
+                <button id="settingsButton"
+                        type="button"
+                        class="icon-button"
+                        data-i18n-aria-label="settings"
+                        aria-label="Settings">
+                    ⚙
+                </button>
+            </div>
+        </header>
+
+        <section class="chat-search">
+            <div class="search-box">
+                <span aria-hidden="true">⌕</span>
+                <input
+                    id="chatSearch"
+                    type="search"
+                    data-i18n-placeholder="searchChats"
+                    placeholder="Search chats">
+            </div>
+        </section>
+
+        <nav class="chat-tabs" aria-label="Navigation">
+            <button class="chat-tab active" type="button" data-i18n="chats">Chats</button>
+            <button class="chat-tab" type="button" data-i18n="updates">Updates</button>
+            <button class="chat-tab" type="button" data-i18n="calls">Calls</button>
+        </nav>
+
+        <section class="chat-list" id="chatList">
+
+            <div class="empty-chat">
+                <div class="empty-icon">💬</div>
+
+                <h1 data-i18n="noChats">No chats yet</h1>
+
+                <p data-i18n="selectChat">
+                    Select a chat to start messaging
+                </p>
+
+                <button id="newChatButton"
+                        class="primary-button"
+                        type="button">
+                    <span data-i18n="startChat">Start a chat</span>
+                    <span>→</span>
+                </button>
+            </div>
+
+        </section>
+
+        <button
+            id="floatingNewChat"
+            class="floating-button"
+            type="button"
+            data-i18n-aria-label="newChat"
+            aria-label="New chat">
+            ✎
+        </button>
+
+    </main>
+
+    <section id="languagePanel"
+             class="language-overlay"
+             aria-hidden="true">
+
+        <div class="language-card">
+
+            <header class="language-card-header">
+                <button id="closeLanguage"
+                        type="button"
+                        class="icon-button"
+                        data-i18n-aria-label="back"
+                        aria-label="Back">
+                    ←
+                </button>
+
+                <h2 data-i18n="language">LANGUAGE</h2>
+            </header>
+
+            <div id="languageList" class="language-list"></div>
+
+        </div>
+
+    </section>
+
+    <script src="/wfc-core.js?v=1"></script>
+    <script src="/wfc-language.js?v=1"></script>
+    <script src="/chat.js?v=1"></script>
+
+</body>
+</html>

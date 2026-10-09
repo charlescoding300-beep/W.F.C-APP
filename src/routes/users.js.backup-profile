@@ -1,0 +1,41 @@
+const express = require('express');
+
+const db = require('../database/db');
+const { requireAuth } = require('../middleware/auth');
+
+const router = express.Router();
+
+router.get('/me', requireAuth, (req, res) => {
+    const user = db.prepare(`
+        SELECT
+            id,
+            username,
+            display_name,
+            phone,
+            email,
+            profile_picture,
+            about,
+            status,
+            created_at,
+            updated_at
+        FROM users
+        WHERE id = ?
+    `).get(req.user.userId);
+
+    if (!user) {
+        return res.status(404).json({
+            success: false,
+            error: {
+                code: 'USER_NOT_FOUND',
+                message: 'User not found'
+            }
+        });
+    }
+
+    res.json({
+        success: true,
+        user
+    });
+});
+
+module.exports = router;

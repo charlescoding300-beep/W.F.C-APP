@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>W.F.C'sChat</title>
+
+    <link rel="stylesheet" href="/style.css?v=10">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- WELCOME SCREEN -->
+    <main id="welcomeScreen" class="screen welcome-screen">
+
+        <div class="welcome-content">
+
+            <!-- Logo -->
+            <div class="brand-mark">
+                <div class="wolf-circle">
+                    🐺
+                </div>
+            </div>
+
+            <div class="brand-name">
+                W.F.C'sChat
+            </div>
+
+            <h1>
+                Welcome to<br>
+                <span>W.F.C'sChat</span>
+            </h1>
+
+            <p class="welcome-subtitle">
+                Connect with people around the world.
+            </p>
+
+            <!-- Language -->
+            <button
+                id="languageButton"
+                class="language-button"
+                type="button"
+            >
+                <span class="language-icon">🌐</span>
+
+                <span class="language-text">
+                    <small>Language</small>
+                    <strong id="selectedLanguage">
+                        English
+                    </strong>
+                </span>
+
+                <span class="language-arrow">›</span>
+            </button>
+
+            <!-- Terms -->
+            <p class="terms">
+                By continuing, you agree to our
+                <a href="#" onclick="return false;">
+                    Terms &amp; Conditions
+                </a>
+                and
+                <a href="#" onclick="return false;">
+                    Privacy Policy
+                </a>.
+            </p>
+
+            <!-- Big continue button -->
+            <a
+                href="/phone.html"
+                class="continue-circle"
+                aria-label="Continue"
+            >
+                <span>→</span>
+            </a>
+
+            <div class="continue-label">
+                Get started
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- LANGUAGE SCREEN -->
+    <section
+        id="languageScreen"
+        class="language-screen"
+        aria-hidden="true"
+    >
+
+        <div class="language-header">
+
+            <button
+                id="backButton"
+                class="back-button"
+                type="button"
+                aria-label="Back"
+            >
+                ←
+            </button>
+
+            <h2>Select language</h2>
+
+        </div>
+
+        <div class="language-search">
+            <span>⌕</span>
+
+            <input
+                id="languageSearch"
+                type="search"
+                placeholder="Search language"
+                autocomplete="off"
+            >
+        </div>
+
+        <div id="languageList" class="language-list"></div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+const languageButton =
+    document.getElementById('languageButton');
+
+const backButton =
+    document.getElementById('backButton');
+
+const welcomeScreen =
+    document.getElementById('welcomeScreen');
+
+const languageScreen =
+    document.getElementById('languageScreen');
+
+const languageSearch =
+    document.getElementById('languageSearch');
+
+const languageList =
+    document.getElementById('languageList');
+
+const selectedLanguage =
+    document.getElementById('selectedLanguage');
+
+
+const languages = [
+    'English',
+    'Français',
+    'Español',
+    'Português',
+    'Deutsch',
+    'Italiano',
+    'Nederlands',
+    'Русский',
+    'Українська',
+    'Türkçe',
+    'العربية',
+    'فارسی',
+    'हिन्दी',
+    'বাংলা',
+    'اردو',
+    '中文',
+    '日本語',
+    '한국어',
+    'ไทย',
+    'Bahasa Indonesia'
+];
+
+
+function renderLanguages(filter = '') {
+
+    const query = filter.trim().toLowerCase();
+
+    languageList.innerHTML = '';
+
+    languages
+        .filter(language =>
+            language.toLowerCase().includes(query)
+        )
+        .forEach(language => {
+
+            const item = document.createElement('button');
+
+            item.type = 'button';
+            item.className = 'language-item';
+
+            item.innerHTML = `
+                <span>${language}</span>
+                <span class="language-check">
+                    ${language === selectedLanguage.textContent.trim() ? '✓' : ''}
+                </span>
+            `;
+
+            item.addEventListener('click', () => {
+
+                selectedLanguage.textContent = language;
+
+                languageScreen.classList.remove('open');
+
+                welcomeScreen.classList.remove('hidden');
+
+                languageScreen.setAttribute(
+                    'aria-hidden',
+                    'true'
+                );
+
+                languageSearch.value = '';
+
+                renderLanguages();
+            });
+
+            languageList.appendChild(item);
+        });
+}
+
+
+languageButton.addEventListener('click', () => {
+
+    welcomeScreen.classList.add('hidden');
+
+    languageScreen.classList.add('open');
+
+    languageScreen.setAttribute(
+        'aria-hidden',
+        'false'
+    );
+
+    renderLanguages();
+
+    setTimeout(() => {
+        languageSearch.focus();
+    }, 250);
+});
+
+
+backButton.addEventListener('click', () => {
+
+    languageScreen.classList.remove('open');
+
+    welcomeScreen.classList.remove('hidden');
+
+    languageScreen.setAttribute(
+        'aria-hidden',
+        'true'
+    );
+
+    languageSearch.value = '';
+});
+
+
+languageSearch.addEventListener('input', () => {
+
+    renderLanguages(languageSearch.value);
+
+});
+
+
+renderLanguages();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+(() => {
+    "use strict";
+
+    const KEY = "wfc_language";
+
+    const translations = {
+        en: {
+            back: "Back",
+            loading: "Loading...",
+            continue: "Continue",
+            cancel: "Cancel",
+            save: "Save",
+            close: "Close",
+            search: "Search",
+            retry: "Retry",
+            error: "Something went wrong.",
+            offline: "You are offline.",
+            online: "You are online."
+        },
+
+        fr: {
+            back: "Retour",
+            loading: "Chargement...",
+            continue: "Continuer",
+            cancel: "Annuler",
+            save: "Enregistrer",
+            close: "Fermer",
+            search: "Rechercher",
+            retry: "Réessayer",
+            error: "Une erreur s'est produite.",
+            offline: "Vous êtes hors ligne.",
+            online: "Vous êtes en ligne."
+        },
+
+        es: {
+            back: "Atrás",
+            loading: "Cargando...",
+            continue: "Continuar",
+            cancel: "Cancelar",
+            save: "Guardar",
+            close: "Cerrar",
+            search: "Buscar",
+            retry: "Reintentar",
+            error: "Algo salió mal.",
+            offline: "Estás sin conexión.",
+            online: "Estás conectado."
+        },
+
+        pt: {
+            back: "Voltar",
+            loading: "Carregando...",
+            continue: "Continuar",
+            cancel: "Cancelar",
+            save: "Guardar",
+            close: "Fechar",
+            search: "Pesquisar",
+            retry: "Tentar novamente",
+            error: "Algo deu errado.",
+            offline: "Você está offline.",
+            online: "Você está online."
+        },
+
+        de: {
+            back: "Zurück",
+            loading: "Wird geladen...",
+            continue: "Weiter",
+            cancel: "Abbrechen",
+            save: "Speichern",
+            close: "Schließen",
+            search: "Suchen",
+            retry: "Erneut versuchen",
+            error: "Etwas ist schiefgelaufen.",
+            offline: "Du bist offline.",
+            online: "Du bist online."
+        },
+
+        it: {
+            back: "Indietro",
+            loading: "Caricamento...",
+            continue: "Continua",
+            cancel: "Annulla",
+            save: "Salva",
+            close: "Chiudi",
+            search: "Cerca",
+            retry: "Riprova",
+            error: "Qualcosa è andato storto.",
+            offline: "Sei offline.",
+            online: "Sei online."
+        },
+
+        nl: {
+            back: "Terug",
+            loading: "Laden...",
+            continue: "Doorgaan",
+            cancel: "Annuleren",
+            save: "Opslaan",
+            close: "Sluiten",
+            search: "Zoeken",
+            retry: "Opnieuw proberen",
+            error: "Er is iets misgegaan.",
+            offline: "Je bent offline.",
+            online: "Je bent online."
+        },
+
+        tr: {
+            back: "Geri",
+            loading: "Yükleniyor...",
+            continue: "Devam",
+            cancel: "İptal",
+            save: "Kaydet",
+            close: "Kapat",
+            search: "Ara",
+            retry: "Tekrar dene",
+            error: "Bir şeyler yanlış gitti.",
+            offline: "Çevrimdışısınız.",
+            online: "Çevrimiçisiniz."
+        },
+
+        ar: {
+            back: "رجوع",
+            loading: "جار التحميل...",
+            continue: "متابعة",
+            cancel: "إلغاء",
+            save: "حفظ",
+            close: "إغلاق",
+            search: "بحث",
+            retry: "إعادة المحاولة",
+            error: "حدث خطأ ما.",
+            offline: "أنت غير متصل.",
+            online: "أنت متصل."
+        },
+
+        hi: {
+            back: "वापस",
+            loading: "लोड हो रहा है...",
+            continue: "जारी रखें",
+            cancel: "रद्द करें",
+            save: "सहेजें",
+            close: "बंद करें",
+            search: "खोजें",
+            retry: "फिर कोशिश करें",
+            error: "कुछ गलत हो गया।",
+            offline: "आप ऑफ़लाइन हैं।",
+            online: "आप ऑनलाइन हैं।"
+        },
+
+        bn: {
+            back: "পিছনে",
+            loading: "লোড হচ্ছে...",
+            continue: "চালিয়ে যান",
+            cancel: "বাতিল",
+            save: "সংরক্ষণ",
+            close: "বন্ধ করুন",
+            search: "অনুসন্ধান",
+            retry: "আবার চেষ্টা করুন",
+            error: "কিছু ভুল হয়েছে।",
+            offline: "আপনি অফলাইনে আছেন।",
+            online: "আপনি অনলাইনে আছেন।"
+        },
+
+        zh: {
+            back: "返回",
+            loading: "加载中...",
+            continue: "继续",
+            cancel: "取消",
+            save: "保存",
+            close: "关闭",
+            search: "搜索",
+            retry: "重试",
+            error: "出了点问题。",
+            offline: "您已离线。",
+            online: "您已在线。"
+        },
+
+        ja: {
+            back: "戻る",
+            loading: "読み込み中...",
+            continue: "続行",
+            cancel: "キャンセル",
+            save: "保存",
+            close: "閉じる",
+            search: "検索",
+            retry: "再試行",
+            error: "問題が発生しました。",
+            offline: "オフラインです。",
+            online: "オンラインです。"
+        },
+
+        ko: {
+            back: "뒤로",
+            loading: "로드 중...",
+            continue: "계속",
+            cancel: "취소",
+            save: "저장",
+            close: "닫기",
+            search: "검색",
+            retry: "다시 시도",
+            error: "문제가 발생했습니다.",
+            offline: "오프라인 상태입니다.",
+            online: "온라인 상태입니다."
+        }
+    };
+
+    function getLanguage() {
+        return (
+            localStorage.getItem(KEY) ||
+            "en"
+        );
+    }
+
+    function setLanguage(language) {
+        if (!translations[language]) {
+            language = "en";
+        }
+
+        localStorage.setItem(KEY, language);
+
+        document.documentElement.lang =
+            language;
+
+        document.documentElement.dir =
+            language === "ar"
+                ? "rtl"
+                : "ltr";
+
+        apply();
+
+        window.dispatchEvent(
+            new CustomEvent(
+                "wfc-language-change",
+                {
+                    detail: { language }
+                }
+            )
+        );
+    }
+
+    function t(key) {
+        const language = getLanguage();
+
+        return (
+            translations[language]?.[key] ||
+            translations.en[key] ||
+            key
+        );
+    }
+
+    function apply() {
+        const language = getLanguage();
+
+        document.documentElement.lang =
+            language;
+
+        document.documentElement.dir =
+            language === "ar"
+                ? "rtl"
+                : "ltr";
+
+        document
+            .querySelectorAll("[data-i18n]")
+            .forEach(element => {
+                const key =
+                    element.dataset.i18n;
+
+                element.textContent =
+                    t(key);
+            });
+
+        document
+            .querySelectorAll("[data-i18n-placeholder]")
+            .forEach(element => {
+                element.placeholder =
+                    t(
+                        element
+                            .dataset
+                            .i18nPlaceholder
+                    );
+            });
+
+        document
+            .querySelectorAll(
+                "[data-i18n-aria-label]"
+            )
+            .forEach(element => {
+                element.setAttribute(
+                    "aria-label",
+                    t(
+                        element
+                            .dataset
+                            .i18nAriaLabel
+                    )
+                );
+            });
+    }
+
+    window.WFC_I18N = {
+        getLanguage,
+        setLanguage,
+        t,
+        apply,
+        translations
+    };
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+        document.addEventListener(
+            "DOMContentLoaded",
+            apply
+        );
+    } else {
+        apply();
+    }
+})();

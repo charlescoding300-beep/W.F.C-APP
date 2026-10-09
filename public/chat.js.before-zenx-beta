@@ -1,0 +1,897 @@
+(() => {
+    "use strict";
+
+    const API = "/api/v1";
+
+    let currentChat = null;
+    let currentUser = null;
+    let chats = [];
+    let users = [];
+
+    const $ = (id) => document.getElementById(id);
+
+    function token() {
+        return window.WFC?.getToken?.() ||
+            localStorage.getItem("wfc_token") ||
+            sessionStorage.getItem("wfc_token") ||
+            "";
+    }
+
+    async function api(path, options = {}) {
+        const headers = {
+            "Content-Type": "application/json",
+            ...(options.headers || {})
+        };
+
+        const t = token();
+
+        if (t) {
+            headers.Authorization = `Bearer ${t}`;
+        }
+
+        const response = await fetch(`${API}${path}`, {
+            ...options,
+            headers
+        });
+
+        let data = {};
+
+        try {
+            data = await response.json();
+        } catch {
+            data = {};
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                data?.error?.message ||
+                data?.message ||
+                "Request failed"
+            );
+        }
+
+        return data;
+    }
+
+
+    function showScreen(name) {
+        $("chatHome")?.classList.toggle(
+            "hidden",
+            name !== "home"
+        );
+
+        $("conversationScreen")?.classList.toggle(
+            "hidden",
+            name !== "conversation"
+        );
+
+        $("newChatScreen")?.classList.toggle(
+            "hidden",
+            name !== "new"
+        );
+    }
+
+
+    function escapeHTML(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    function displayName(user) {
+        return (
+            user?.display_name ||
+            user?.username ||
+            user?.phone ||
+            "User"
+        );
+    }
+
+
+    function formatTime(value) {
+        if (!value) return "";
+
+        const date = new Date(
+            String(value).replace(" ", "T") + "Z"
+        );
+
+        if (Number.isNaN(date.getTime())) {
+            return "";
+        }
+
+        return new Intl.DateTimeFormat(
+            window.WFC_I18N?.getLanguage?.() || "en",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        ).format(date);
+    }
+
+
+    function formatChatPreview(chat) {
+        if (!chat.last_message_body) {
+            return "No messages yet";
+        }
+
+        if (chat.last_message_type !== "text") {
+            return "Media";
+        }
+
+        return chat.last_message_body;
+    }
+
+
+    function renderChats() {
+        const list = $("chatList");
+
+        if (!list) return;
+
+        if (!chats.length) {
+            list.innerHTML = `
+                <div class="empty-chat">
+                    <div class="empty-icon">💬</div>
+
+                    <h1 data-i18n="noChats">
+                        No chats yet
+                    </h1>
+
+                    <p data-i18n="selectChat">
+                        Select a chat to start messaging
+                    </p>
+
+                    <button
+                        id="newChatButton"
+                        class="primary-button"
+                        type="button">
+
+                        <span data-i18n="startChat">
+                            Start a chat
+                        </span>
+
+                        <span>→</span>
+                    </button>
+                </div>
+            `;
+
+            $("newChatButton")?.addEventListener(
+                "click",
+                openNewChat
+            );
+
+            window.WFC_I18N?.apply?.();
+
+            return;
+        }
+
+        list.innerHTML = chats.map(chat => {
+            const name =
+                chat.type === "private"
+                    ? displayName({
+                        display_name: chat.other_display_name,
+                        username: chat.other_username
+                    })
+                    : (
+                        chat.name ||
+                        "Group"
+                    );
+
+            const avatar =
+                chat.type === "private"
+                    ? "👤"
+                    : "👥";
+
+            return `
+                <button
+                    type="button"
+                    class="chat-row"
+                    data-chat-id="${chat.id}">
+
+                    <div class="chat-row-avatar">
+                        ${avatar}
+                    </div>
+
+                    <div class="chat-row-content">
+
+                        <div class="chat-row-top">
+                            <strong>
+                                ${escapeHTML(name)}
+                            </strong>
+
+                            <time>
+                                ${escapeHTML(
+                                    formatTime(
+                                        chat.last_message_created_at
+                                    )
+                                )}
+                            </time>
+                        </div>
+
+                        <div class="chat-row-bottom">
+                            <span>
+                                ${escapeHTML(
+                                    formatChatPreview(chat)
+                                )}
+                            </span>
+                        </div>
+
+                    </div>
+
+                </button>
+            `;
+        }).join("");
+
+        list.querySelectorAll(".chat-row").forEach(button => {
+            button.addEventListener("click", () => {
+                openConversation(
+                    Number(button.dataset.chatId)
+                );
+            });
+        });
+    }
+
+
+    async function loadChats() {
+        try {
+            const data = await api("/chats");
+
+            chats = Array.isArray(data.chats)
+                ? data.chats
+                : [];
+
+            renderChats();
+
+        } catch (error) {
+            console.error("Failed to load chats:", error);
+
+            const list = $("chatList");
+
+            if (list) {
+                list.innerHTML = `
+                    <div class="empty-chat">
+                        <div class="empty-icon">⚠️</div>
+
+                        <h1>
+                            Unable to load chats
+                        </h1>
+
+                        <p>
+                            ${escapeHTML(error.message)}
+                        </p>
+
+                        <button
+                            id="retryChats"
+                            class="primary-button"
+                            type="button">
+                            Retry
+                        </button>
+                    </div>
+                `;
+
+                $("retryChats")?.addEventListener(
+                    "click",
+                    loadChats
+                );
+            }
+        }
+    }
+
+
+    async function loadCurrentUser() {
+        try {
+            const data = await api("/users/me");
+
+            currentUser =
+                data.user ||
+                data;
+
+            if ($("chatUserName")) {
+                $("chatUserName").textContent =
+                    displayName(currentUser);
+            }
+
+        } catch (error) {
+            console.error(
+                "Failed to load current user:",
+                error
+            );
+        }
+    }
+
+
+    async function openConversation(chatId) {
+        try {
+            const data = await api(
+                `/chats/${chatId}`
+            );
+
+            currentChat = data.chat;
+
+            const otherName =
+                displayName({
+                    display_name:
+                        currentChat.other_display_name,
+                    username:
+                        currentChat.other_username
+                });
+
+            $("conversationName").textContent =
+                otherName;
+
+            $("conversationStatus").textContent =
+                currentChat.other_status ||
+                "offline";
+
+            showScreen("conversation");
+
+            await loadMessages(chatId);
+
+            await markMessagesRead(chatId);
+
+            $("messageInput")?.focus();
+
+        } catch (error) {
+            console.error(
+                "Failed to open conversation:",
+                error
+            );
+
+            alert(error.message);
+        }
+    }
+
+
+    async function loadMessages(chatId) {
+        const list = $("messageList");
+
+        if (!list) return;
+
+        list.innerHTML = `
+            <div class="message-loading">
+                Loading messages...
+            </div>
+        `;
+
+        try {
+            const data = await api(
+                `/messages/${chatId}`
+            );
+
+            const messages =
+                Array.isArray(data.messages)
+                    ? data.messages
+                    : [];
+
+            if (!messages.length) {
+                list.innerHTML = `
+                    <div class="message-empty">
+                        <div>💬</div>
+                        <p>
+                            No messages yet.
+                        </p>
+                    </div>
+                `;
+
+                return;
+            }
+
+            list.innerHTML = messages.map(message => {
+                const mine =
+                    Number(message.sender_id) ===
+                    Number(currentUser?.id);
+
+                return `
+                    <div
+                        class="message-row ${mine ? "mine" : "theirs"}">
+
+                        <div class="message-bubble">
+
+                            <div class="message-body">
+                                ${escapeHTML(
+                                    message.body
+                                )}
+                            </div>
+
+                            <div class="message-meta">
+                                <time>
+                                    ${escapeHTML(
+                                        formatTime(
+                                            message.created_at
+                                        )
+                                    )}
+                                </time>
+
+                                ${
+                                    mine
+                                        ? `<span class="message-check">
+                                            ${message.is_read ? "✓✓" : "✓"}
+                                           </span>`
+                                        : ""
+                                }
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+            }).join("");
+
+            list.scrollTop = list.scrollHeight;
+
+        } catch (error) {
+            console.error(
+                "Failed to load messages:",
+                error
+            );
+
+            list.innerHTML = `
+                <div class="message-empty">
+                    <div>⚠️</div>
+                    <p>
+                        ${escapeHTML(error.message)}
+                    </p>
+                </div>
+            `;
+        }
+    }
+
+
+    async function markMessagesRead(chatId) {
+        try {
+            await api(
+                `/messages/${chatId}/read`,
+                {
+                    method: "PATCH"
+                }
+            );
+        } catch (error) {
+            console.error(
+                "Failed to mark messages read:",
+                error
+            );
+        }
+    }
+
+
+    async function sendMessage(event) {
+        event.preventDefault();
+
+        if (!currentChat) return;
+
+        const input = $("messageInput");
+
+        if (!input) return;
+
+        const body = input.value.trim();
+
+        if (!body) return;
+
+        const button = $("sendMessageButton");
+
+        if (button) {
+            button.disabled = true;
+        }
+
+        try {
+            const data = await api(
+                "/messages",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        chat_id: currentChat.id,
+                        body
+                    })
+                }
+            );
+
+            input.value = "";
+
+            await loadMessages(
+                currentChat.id
+            );
+
+            await loadChats();
+
+            if (button) {
+                button.disabled = false;
+            }
+
+            input.focus();
+
+            return data;
+
+        } catch (error) {
+            console.error(
+                "Failed to send message:",
+                error
+            );
+
+            alert(error.message);
+
+            if (button) {
+                button.disabled = false;
+            }
+        }
+    }
+
+
+    function openNewChat() {
+        showScreen("new");
+
+        $("userSearch")?.focus();
+
+        searchUsers("");
+    }
+
+
+    function closeNewChat() {
+        showScreen("home");
+
+        loadChats();
+    }
+
+
+    async function searchUsers(query) {
+        const results = $("userSearchResults");
+
+        if (!results) return;
+
+        const q = String(query || "").trim();
+
+        try {
+            /*
+             * The users route supports /search.
+             * We only display other users.
+             */
+            const path = q
+                ? `/users/search?q=${encodeURIComponent(q)}`
+                : "/users/search";
+
+            const data = await api(path);
+
+            users = Array.isArray(data.users)
+                ? data.users
+                : [];
+
+            if (currentUser) {
+                users = users.filter(
+                    user =>
+                        Number(user.id) !==
+                        Number(currentUser.id)
+                );
+            }
+
+            renderUserResults();
+
+        } catch (error) {
+            console.error(
+                "User search failed:",
+                error
+            );
+
+            results.innerHTML = `
+                <div class="user-search-empty">
+                    ${escapeHTML(error.message)}
+                </div>
+            `;
+        }
+    }
+
+
+    function renderUserResults() {
+        const results = $("userSearchResults");
+
+        if (!results) return;
+
+        if (!users.length) {
+            results.innerHTML = `
+                <div class="user-search-empty">
+                    No users found
+                </div>
+            `;
+
+            return;
+        }
+
+        results.innerHTML = users.map(user => `
+            <button
+                type="button"
+                class="user-result"
+                data-user-id="${user.id}">
+
+                <div class="user-result-avatar">
+                    👤
+                </div>
+
+                <div class="user-result-info">
+
+                    <strong>
+                        ${escapeHTML(
+                            displayName(user)
+                        )}
+                    </strong>
+
+                    <span>
+                        @${escapeHTML(
+                            user.username || ""
+                        )}
+                    </span>
+
+                </div>
+
+            </button>
+        `).join("");
+
+        results.querySelectorAll(
+            ".user-result"
+        ).forEach(button => {
+            button.addEventListener(
+                "click",
+                () => startPrivateChat(
+                    Number(button.dataset.userId)
+                )
+            );
+        });
+    }
+
+
+    async function startPrivateChat(userId) {
+        try {
+            const data = await api(
+                "/chats/private",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        user_id: userId
+                    })
+                }
+            );
+
+            if (!data.chat) {
+                throw new Error(
+                    "Unable to open chat"
+                );
+            }
+
+            await openConversation(
+                data.chat.id
+            );
+
+        } catch (error) {
+            console.error(
+                "Failed to start chat:",
+                error
+            );
+
+            alert(error.message);
+        }
+    }
+
+
+    function setupLanguage() {
+        const button =
+            $("languageButton");
+
+        const panel =
+            $("languagePanel");
+
+        const close =
+            $("closeLanguage");
+
+        const list =
+            $("languageList");
+
+        if (!button || !panel || !list) {
+            return;
+        }
+
+        function renderLanguages() {
+            const languages =
+                window.WFC_I18N?.getLanguages?.() ||
+                [];
+
+            const selected =
+                window.WFC_I18N?.getLanguage?.() ||
+                "en";
+
+            list.innerHTML =
+                languages.map(language => `
+                    <button
+                        type="button"
+                        class="language-option ${
+                            language.code === selected
+                                ? "selected"
+                                : ""
+                        }"
+                        data-language="${language.code}">
+
+                        <span>
+                            ${escapeHTML(language.name)}
+                        </span>
+
+                        ${
+                            language.code === selected
+                                ? "<span>✓</span>"
+                                : ""
+                        }
+
+                    </button>
+                `).join("");
+
+            list.querySelectorAll(
+                ".language-option"
+            ).forEach(option => {
+                option.addEventListener(
+                    "click",
+                    () => {
+                        const language =
+                            option.dataset.language;
+
+                        window.WFC_I18N?.setLanguage(
+                            language
+                        );
+
+                        renderLanguages();
+                        renderChats();
+                    }
+                );
+            });
+        }
+
+        button.addEventListener(
+            "click",
+            () => {
+                panel.classList.add("open");
+                panel.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+                renderLanguages();
+            }
+        );
+
+        close?.addEventListener(
+            "click",
+            () => {
+                panel.classList.remove("open");
+                panel.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+            }
+        );
+
+        renderLanguages();
+    }
+
+
+    function setupNavigation() {
+        $("floatingNewChat")?.addEventListener(
+            "click",
+            openNewChat
+        );
+
+        $("newChatBack")?.addEventListener(
+            "click",
+            closeNewChat
+        );
+
+        $("conversationBack")?.addEventListener(
+            "click",
+            () => {
+                currentChat = null;
+                showScreen("home");
+                loadChats();
+            }
+        );
+
+        $("messageForm")?.addEventListener(
+            "submit",
+            sendMessage
+        );
+
+        $("userSearch")?.addEventListener(
+            "input",
+            event => {
+                searchUsers(event.target.value);
+            }
+        );
+
+        $("chatSearch")?.addEventListener(
+            "input",
+            event => {
+                const query =
+                    event.target.value
+                        .trim()
+                        .toLowerCase();
+
+                document
+                    .querySelectorAll(".chat-row")
+                    .forEach(row => {
+                        const text =
+                            row.textContent
+                                .toLowerCase();
+
+                        row.style.display =
+                            !query ||
+                            text.includes(query)
+                                ? ""
+                                : "none";
+                    });
+            }
+        );
+
+        document
+            .querySelectorAll(".chat-tab")
+            .forEach(tab => {
+                tab.addEventListener(
+                    "click",
+                    () => {
+                        document
+                            .querySelectorAll(".chat-tab")
+                            .forEach(item =>
+                                item.classList.remove(
+                                    "active"
+                                )
+                            );
+
+                        tab.classList.add("active");
+                    }
+                );
+            });
+
+        $("settingsButton")?.addEventListener(
+            "click",
+            () => {
+                alert("Settings will be connected next.");
+            }
+        );
+    }
+
+
+    function setupLanguageListener() {
+        window.addEventListener(
+            "wfc-language-change",
+            () => {
+                renderChats();
+
+                if (currentChat) {
+                    loadMessages(
+                        currentChat.id
+                    );
+                }
+            }
+        );
+    }
+
+
+    async function init() {
+        setupNavigation();
+        setupLanguage();
+        setupLanguageListener();
+
+        window.WFC_I18N?.apply?.();
+
+        await loadCurrentUser();
+        await loadChats();
+    }
+
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+        document.addEventListener(
+            "DOMContentLoaded",
+            init
+        );
+    } else {
+        init();
+    }
+
+})();

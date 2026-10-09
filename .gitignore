@@ -1,0 +1,23 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Private databases and local database files
+data/*.db
+data/*.db-*
+data/*.sqlite
+data/*.sqlite-*
+
+# Private backups and temporary files
+backup/
+backups/
+*.pid
+.DS_Store

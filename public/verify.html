@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta name="theme-color" content="#0b141a">
+
+    <title>W.F.C'sChat — Verify</title>
+
+    <link rel="stylesheet" href="/wfc-global.css?v=1">
+    <link rel="stylesheet" href="/verify.css?v=1">
+</head>
+
+<body>
+
+<main class="verify-screen">
+
+    <header class="verify-header">
+
+        <button
+            type="button"
+            id="backButton"
+            class="back-button"
+            aria-label="Back"
+        >
+            ←
+        </button>
+
+        <div class="brand">
+            <span class="brand-wolf">🐺</span>
+            <span>W.F.C'sChat</span>
+        </div>
+
+    </header>
+
+
+    <section class="verify-content">
+
+        <div class="verify-icon" aria-hidden="true">
+            <span>✓</span>
+        </div>
+
+        <h1 data-i18n="verifyTitle">
+            Verify your phone number
+        </h1>
+
+        <p class="verify-description" data-i18n="verifyDescription">
+            Enter the 8-digit code sent to your phone.
+        </p>
+
+        <div class="phone-display">
+            <span id="phoneDisplay">••••</span>
+        </div>
+
+        <button
+            type="button"
+            id="changeNumber"
+            class="change-number"
+            data-i18n="changeNumber"
+        >
+            Change number
+        </button>
+
+
+        <div class="code-area">
+
+            <label
+                for="verificationCode"
+                data-i18n="verificationCodeLabel"
+            >
+                Verification code
+            </label>
+
+            <input
+                id="verificationCode"
+                class="verification-code"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                maxlength="8"
+                pattern="[0-9]*"
+                placeholder="••••••••"
+                aria-label="Verification code"
+            >
+
+        </div>
+
+
+        <p
+            id="verifyError"
+            class="verify-error"
+            role="alert"
+            aria-live="polite"
+        ></p>
+
+
+        <button
+            type="button"
+            id="verifyButton"
+            class="verify-button"
+            disabled
+        >
+            <span data-i18n="verify">
+                Verify
+            </span>
+            <span aria-hidden="true">→</span>
+        </button>
+
+
+        <div class="verify-help">
+
+            <p data-i18n="didntReceiveCode">
+                Didn't receive the code?
+            </p>
+
+            <button
+                type="button"
+                id="resendButton"
+                class="resend-button"
+                disabled
+            >
+                <span data-i18n="resendCode">
+                    Resend code
+                </span>
+                <span id="resendTimer"></span>
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="/wfc-core.js?v=1"></script>
+<script src="/wfc-language.js?v=3"></script>
+<script src="/i18n.js?v=2"></script>
+<script src="/back.js?v=1"></script>
+<script src="/verify.js?v=1"></script>
+
+</body>
+</html>

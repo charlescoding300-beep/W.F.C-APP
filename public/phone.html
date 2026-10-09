@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1.0, user-scalable=no"
+    >
+    <meta name="theme-color" content="#00a884">
+
+    <title>W.F.C'sChat — Phone</title>
+
+    <link
+        rel="stylesheet"
+        href="/phone.css?v=40"
+    >
+</head>
+
+<body>
+
+    <main class="phone-screen">
+
+        <header class="phone-header">
+
+            <button
+                type="button"
+                class="back-button"
+                id="backButton"
+                aria-label="Back"
+            >
+                ←
+            </button>
+
+            <div class="header-title">
+                <div class="header-logo">🐺</div>
+                <span>W.F.C'sChat</span>
+            </div>
+
+        </header>
+
+
+        <section class="phone-content">
+
+            <div class="intro">
+
+                <h1 data-i18n="phoneTitle">Enter your phone number</h1>
+
+                <p data-i18n="phoneDescription">
+                    Select your country and enter your phone number.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="country-selector"
+                id="countrySelector"
+                aria-expanded="false"
+            >
+
+                <span
+                    class="selected-flag"
+                    id="selectedFlag"
+                >🇳🇬</span>
+
+                <span class="selected-country">
+
+                    <span
+                        class="selected-country-name"
+                        id="selectedCountryName"
+                    >
+                        Nigeria
+                    </span>
+
+                    <span
+                        class="selected-country-code"
+                        id="selectedCallingCode"
+                    >
+                        +234
+                    </span>
+
+                </span>
+
+                <span class="country-arrow">›</span>
+
+            </button>
+
+
+            <div class="phone-input-row">
+
+                <input
+                    id="phoneCode"
+                    class="phone-code"
+                    type="tel"
+                    inputmode="tel"
+                    autocomplete="tel"
+                    value="+234"
+                    aria-label="Country calling code"
+                >
+
+                <input
+                    id="phoneInput"
+                    class="phone-number"
+                    type="tel"
+                    inputmode="tel"
+                    autocomplete="tel"
+                    placeholder="Phone number" data-i18n-placeholder="phonePlaceholder" data-i18n-placeholder="phonePlaceholder"
+                    aria-label="Phone number"
+                >
+
+            </div>
+
+
+            <p
+                class="phone-error"
+                id="phoneError"
+            ></p>
+
+
+            <button
+                type="button"
+                class="continue-button"
+                id="continueButton"
+            >
+                <span data-i18n="continue">Continue</span>
+                <span>→</span>
+            </button>
+
+            <p class="security-note" data-i18n="security">
+                Your phone number is used to create
+                and secure your W.F.C'sChat account.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- COUNTRY PANEL -->
+
+    <section
+        class="country-panel"
+        id="countryPanel"
+        aria-hidden="true"
+    >
+
+        <div class="country-panel-inner">
+
+            <header class="country-header">
+
+                <button
+                    type="button"
+                    class="country-back"
+                    id="countryBack"
+                    aria-label="Back"
+                >
+                    ←
+                </button>
+
+                <h2 data-i18n="selectCountry">Select country</h2>
+
+            </header>
+
+
+            <div class="country-search">
+
+                <span>⌕</span>
+
+                <input
+                    type="search"
+                    id="countrySearch"
+                    placeholder="Search country" data-i18n-placeholder="searchCountry" data-i18n-placeholder="searchCountry"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div
+                class="country-list"
+                id="countryList"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <script src="/i18n.js?v=2"></script>
+    <script src="/back.js?v=1"></script>
+<script src="/wfc-core.js?v=1"></script>
+<script src="/wfc-ui.js?v=1"></script>
+<script src="/wfc-language.js?v=1"></script>
+<script src="/countries.js?v=40"></script>
+    <script src="/phone.js?v=40"></script>
+
+<script>
+(() => {
+    const button = document.getElementById("backButton");
+
+    if (!button) return;
+
+    button.addEventListener("click", () => {
+        if (window.WFC_BACK && typeof window.WFC_BACK.goBack === "function") {
+            window.WFC_BACK.goBack("/");
+        } else if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = "/";
+        }
+    });
+})();
+</script>
+
+</body>
+</html>

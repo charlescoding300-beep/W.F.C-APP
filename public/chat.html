@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#00a884">
+    <title>W.F.C'sChat</title>
+
+    <link rel="stylesheet" href="/wfc-global.css?v=1">
+    <link rel="stylesheet" href="/chat.css?v=2">
+</head>
+
+<body class="chat-page">
+
+<main class="chat-app">
+
+    <!-- CHAT HOME -->
+    <section id="chatHome" class="chat-screen">
+
+        <header class="chat-topbar">
+            <div class="chat-brand">
+                <div class="chat-logo">🐺</div>
+
+                <div>
+                    <strong>W.F.C'sChat</strong>
+                    <span id="chatUserName">W.F.C'sChat</span>
+                </div>
+            </div>
+
+            <div class="chat-actions">
+                <button
+                    id="languageButton"
+                    type="button"
+                    class="icon-button"
+                    aria-label="Language">
+                    🌐
+                </button>
+
+                <button
+                    id="settingsButton"
+                    type="button"
+                    class="icon-button"
+                    data-i18n-aria-label="settings"
+                    aria-label="Settings">
+                    ⚙
+                </button>
+            </div>
+        </header>
+
+        <section class="chat-search">
+            <div class="search-box">
+                <span aria-hidden="true">⌕</span>
+
+                <input
+                    id="chatSearch"
+                    type="search"
+                    data-i18n-placeholder="searchChats"
+                    placeholder="Search chats">
+            </div>
+        </section>
+
+        <nav class="chat-tabs" aria-label="Navigation">
+            <button
+                class="chat-tab active"
+                type="button"
+                data-tab="chats"
+                data-i18n="chats">
+                Chats
+            </button>
+
+            <button
+                class="chat-tab"
+                type="button"
+                data-tab="updates"
+                data-i18n="updates">
+                Updates
+            </button>
+
+            <button
+                class="chat-tab"
+                type="button"
+                data-tab="calls"
+                data-i18n="calls">
+                Calls
+            </button>
+        </nav>
+
+        <section
+            class="chat-list"
+            id="chatList">
+        </section>
+
+        <button
+            id="floatingNewChat"
+            class="floating-button"
+            type="button"
+            data-i18n-aria-label="newChat"
+            aria-label="New chat">
+            ✎
+        </button>
+
+    </section>
+
+
+    <!-- CONVERSATION -->
+    <section id="conversationScreen" class="conversation-screen hidden">
+
+        <header class="conversation-topbar">
+
+            <button
+                id="conversationBack"
+                type="button"
+                class="icon-button"
+                data-i18n-aria-label="back"
+                aria-label="Back">
+                ←
+            </button>
+
+            <div class="conversation-person">
+
+                <div
+                    id="conversationAvatar"
+                    class="conversation-avatar">
+                    👤
+                </div>
+
+                <div class="conversation-person-info">
+                    <strong id="conversationName">
+                        Chat
+                    </strong>
+
+                    <span id="conversationStatus">
+                        offline
+                    </span>
+                </div>
+
+            </div>
+
+            <button
+                id="conversationMore"
+                type="button"
+                class="icon-button"
+                aria-label="More">
+                ⋮
+            </button>
+
+        </header>
+
+
+        <section
+            id="messageList"
+            class="message-list">
+        </section>
+
+
+        <form
+            id="messageForm"
+            class="message-composer">
+
+            <button
+                id="attachButton"
+                type="button"
+                class="composer-button"
+                aria-label="Attach">
+                ＋
+            </button>
+
+            <input
+                id="messageInput"
+                type="text"
+                autocomplete="off"
+                maxlength="5000"
+                data-i18n-placeholder="typeMessage"
+                placeholder="Type a message">
+
+            <button
+                id="sendMessageButton"
+                type="submit"
+                class="send-button"
+                data-i18n-aria-label="send"
+                aria-label="Send">
+                ➤
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- NEW CHAT -->
+    <section
+        id="newChatScreen"
+        class="new-chat-screen hidden">
+
+        <header class="new-chat-topbar">
+
+            <button
+                id="newChatBack"
+                type="button"
+                class="icon-button"
+                data-i18n-aria-label="back"
+                aria-label="Back">
+                ←
+            </button>
+
+            <h2 data-i18n="newChat">
+                New chat
+            </h2>
+
+        </header>
+
+        <div class="new-chat-search">
+            <div class="search-box">
+                <span aria-hidden="true">⌕</span>
+
+                <input
+                    id="userSearch"
+                    type="search"
+                    placeholder="Search users">
+            </div>
+        </div>
+
+        <section
+            id="userSearchResults"
+            class="user-search-results">
+        </section>
+
+    </section>
+
+</main>
+
+
+<!-- LANGUAGE -->
+<section
+    id="languagePanel"
+    class="language-overlay"
+    aria-hidden="true">
+
+    <div class="language-card">
+
+        <header class="language-card-header">
+
+            <button
+                id="closeLanguage"
+                type="button"
+                class="icon-button"
+                data-i18n-aria-label="back"
+                aria-label="Back">
+                ←
+            </button>
+
+            <h2 data-i18n="language">
+                LANGUAGE
+            </h2>
+
+        </header>
+
+        <div
+            id="languageList"
+            class="language-list">
+        </div>
+
+    </div>
+
+</section>
+
+
+<script src="/wfc-core.js?v=1"></script>
+<script src="/wfc-language.js?v=2"></script>
+<script src="/chat.js?v=2"></script>
+
+</body>
+</html>

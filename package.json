@@ -1,0 +1,21 @@
+{
+  "name": "wfc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WFC - W in the fucking chat",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^18.0.5",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "libphonenumber-js": "^1.13.14",
+    "multer": "^1.4.5-lts.1"
+  }
+}

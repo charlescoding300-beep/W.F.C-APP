@@ -1,0 +1,19 @@
+(() => {
+    "use strict";
+
+    function goBack(fallback = "/") {
+        if (
+            window.history.length > 1 &&
+            document.referrer
+        ) {
+            window.history.back();
+            return;
+        }
+
+        window.location.replace(fallback);
+    }
+
+    window.WFC_BACK = {
+        goBack
+    };
+})();

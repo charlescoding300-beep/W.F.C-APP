@@ -1,0 +1,344 @@
+(() => {
+    "use strict";
+
+    const KEY = "wfc_language";
+
+    const translations = {
+        en: {
+            back: "Back",
+            loading: "Loading...",
+            continue: "Continue",
+            cancel: "Cancel",
+            save: "Save",
+            close: "Close",
+            search: "Search",
+            retry: "Retry",
+            error: "Something went wrong.",
+            offline: "You are offline.",
+            online: "You are online."
+        },
+
+        fr: {
+            back: "Retour",
+            loading: "Chargement...",
+            continue: "Continuer",
+            cancel: "Annuler",
+            save: "Enregistrer",
+            close: "Fermer",
+            search: "Rechercher",
+            retry: "Réessayer",
+            error: "Une erreur s'est produite.",
+            offline: "Vous êtes hors ligne.",
+            online: "Vous êtes en ligne."
+        },
+
+        es: {
+            back: "Atrás",
+            loading: "Cargando...",
+            continue: "Continuar",
+            cancel: "Cancelar",
+            save: "Guardar",
+            close: "Cerrar",
+            search: "Buscar",
+            retry: "Reintentar",
+            error: "Algo salió mal.",
+            offline: "Estás sin conexión.",
+            online: "Estás conectado."
+        },
+
+        pt: {
+            back: "Voltar",
+            loading: "Carregando...",
+            continue: "Continuar",
+            cancel: "Cancelar",
+            save: "Guardar",
+            close: "Fechar",
+            search: "Pesquisar",
+            retry: "Tentar novamente",
+            error: "Algo deu errado.",
+            offline: "Você está offline.",
+            online: "Você está online."
+        },
+
+        de: {
+            back: "Zurück",
+            loading: "Wird geladen...",
+            continue: "Weiter",
+            cancel: "Abbrechen",
+            save: "Speichern",
+            close: "Schließen",
+            search: "Suchen",
+            retry: "Erneut versuchen",
+            error: "Etwas ist schiefgelaufen.",
+            offline: "Du bist offline.",
+            online: "Du bist online."
+        },
+
+        it: {
+            back: "Indietro",
+            loading: "Caricamento...",
+            continue: "Continua",
+            cancel: "Annulla",
+            save: "Salva",
+            close: "Chiudi",
+            search: "Cerca",
+            retry: "Riprova",
+            error: "Qualcosa è andato storto.",
+            offline: "Sei offline.",
+            online: "Sei online."
+        },
+
+        nl: {
+            back: "Terug",
+            loading: "Laden...",
+            continue: "Doorgaan",
+            cancel: "Annuleren",
+            save: "Opslaan",
+            close: "Sluiten",
+            search: "Zoeken",
+            retry: "Opnieuw proberen",
+            error: "Er is iets misgegaan.",
+            offline: "Je bent offline.",
+            online: "Je bent online."
+        },
+
+        tr: {
+            back: "Geri",
+            loading: "Yükleniyor...",
+            continue: "Devam",
+            cancel: "İptal",
+            save: "Kaydet",
+            close: "Kapat",
+            search: "Ara",
+            retry: "Tekrar dene",
+            error: "Bir şeyler yanlış gitti.",
+            offline: "Çevrimdışısınız.",
+            online: "Çevrimiçisiniz."
+        },
+
+        ar: {
+            back: "رجوع",
+            loading: "جار التحميل...",
+            continue: "متابعة",
+            cancel: "إلغاء",
+            save: "حفظ",
+            close: "إغلاق",
+            search: "بحث",
+            retry: "إعادة المحاولة",
+            error: "حدث خطأ ما.",
+            offline: "أنت غير متصل.",
+            online: "أنت متصل."
+        },
+
+        hi: {
+            back: "वापस",
+            loading: "लोड हो रहा है...",
+            continue: "जारी रखें",
+            cancel: "रद्द करें",
+            save: "सहेजें",
+            close: "बंद करें",
+            search: "खोजें",
+            retry: "फिर कोशिश करें",
+            error: "कुछ गलत हो गया।",
+            offline: "आप ऑफ़लाइन हैं।",
+            online: "आप ऑनलाइन हैं।"
+        },
+
+        bn: {
+            back: "পিছনে",
+            loading: "লোড হচ্ছে...",
+            continue: "চালিয়ে যান",
+            cancel: "বাতিল",
+            save: "সংরক্ষণ",
+            close: "বন্ধ করুন",
+            search: "অনুসন্ধান",
+            retry: "আবার চেষ্টা করুন",
+            error: "কিছু ভুল হয়েছে।",
+            offline: "আপনি অফলাইনে আছেন।",
+            online: "আপনি অনলাইনে আছেন।"
+        },
+
+        zh: {
+            back: "返回",
+            loading: "加载中...",
+            continue: "继续",
+            cancel: "取消",
+            save: "保存",
+            close: "关闭",
+            search: "搜索",
+            retry: "重试",
+            error: "出了点问题。",
+            offline: "您已离线。",
+            online: "您已在线。"
+        },
+
+        ja: {
+            back: "戻る",
+            loading: "読み込み中...",
+            continue: "続行",
+            cancel: "キャンセル",
+            save: "保存",
+            close: "閉じる",
+            search: "検索",
+            retry: "再試行",
+            error: "問題が発生しました。",
+            offline: "オフラインです。",
+            online: "オンラインです。"
+        },
+
+        ko: {
+            back: "뒤로",
+            loading: "로드 중...",
+            continue: "계속",
+            cancel: "취소",
+            save: "저장",
+            close: "닫기",
+            search: "검색",
+            retry: "다시 시도",
+            error: "문제가 발생했습니다.",
+            offline: "오프라인 상태입니다.",
+            online: "온라인 상태입니다."
+        }
+    };
+
+
+        Object.assign(translations.en, {"chats": "Chats", "updates": "Updates", "calls": "Calls", "contacts": "Contacts", "newChat": "New chat", "searchChats": "Search chats", "settings": "Settings", "profile": "Profile", "newGroup": "New group", "message": "Message", "typeMessage": "Type a message", "send": "Send", "attach": "Attach", "camera": "Camera", "microphone": "Microphone", "online": "Online", "lastSeen": "last seen", "noChats": "No chats yet", "startChat": "Start a chat", "selectChat": "Select a chat to start messaging", "language": "LANGUAGE"});
+
+        Object.assign(translations.fr, {"chats": "Discussions", "updates": "Actualités", "calls": "Appels", "contacts": "Contacts", "newChat": "Nouvelle discussion", "searchChats": "Rechercher des discussions", "settings": "Paramètres", "profile": "Profil", "newGroup": "Nouveau groupe", "message": "Message", "typeMessage": "Écrire un message", "send": "Envoyer", "attach": "Joindre", "camera": "Appareil photo", "microphone": "Microphone", "online": "En ligne", "lastSeen": "vu récemment", "noChats": "Aucune discussion", "startChat": "Démarrer une discussion", "selectChat": "Sélectionnez une discussion pour commencer à envoyer des messages", "language": "LANGUE"});
+
+        Object.assign(translations.es, {"chats": "Chats", "updates": "Novedades", "calls": "Llamadas", "contacts": "Contactos", "newChat": "Nuevo chat", "searchChats": "Buscar chats", "settings": "Ajustes", "profile": "Perfil", "newGroup": "Nuevo grupo", "message": "Mensaje", "typeMessage": "Escribe un mensaje", "send": "Enviar", "attach": "Adjuntar", "camera": "Cámara", "microphone": "Micrófono", "online": "En línea", "lastSeen": "última vez", "noChats": "Aún no hay chats", "startChat": "Iniciar un chat", "selectChat": "Selecciona un chat para empezar a enviar mensajes", "language": "IDIOMA"});
+
+        Object.assign(translations.pt, {"chats": "Conversas", "updates": "Atualizações", "calls": "Chamadas", "contacts": "Contatos", "newChat": "Nova conversa", "searchChats": "Pesquisar conversas", "settings": "Configurações", "profile": "Perfil", "newGroup": "Novo grupo", "message": "Mensagem", "typeMessage": "Digite uma mensagem", "send": "Enviar", "attach": "Anexar", "camera": "Câmera", "microphone": "Microfone", "online": "Online", "lastSeen": "visto por último", "noChats": "Nenhuma conversa ainda", "startChat": "Iniciar conversa", "selectChat": "Selecione uma conversa para começar a enviar mensagens", "language": "IDIOMA"});
+
+        Object.assign(translations.de, {"chats": "Chats", "updates": "Neuigkeiten", "calls": "Anrufe", "contacts": "Kontakte", "newChat": "Neuer Chat", "searchChats": "Chats durchsuchen", "settings": "Einstellungen", "profile": "Profil", "newGroup": "Neue Gruppe", "message": "Nachricht", "typeMessage": "Nachricht eingeben", "send": "Senden", "attach": "Anhängen", "camera": "Kamera", "microphone": "Mikrofon", "online": "Online", "lastSeen": "zuletzt gesehen", "noChats": "Noch keine Chats", "startChat": "Chat starten", "selectChat": "Wähle einen Chat, um Nachrichten zu senden", "language": "SPRACHE"});
+
+        Object.assign(translations.it, {"chats": "Chat", "updates": "Aggiornamenti", "calls": "Chiamate", "contacts": "Contatti", "newChat": "Nuova chat", "searchChats": "Cerca chat", "settings": "Impostazioni", "profile": "Profilo", "newGroup": "Nuovo gruppo", "message": "Messaggio", "typeMessage": "Scrivi un messaggio", "send": "Invia", "attach": "Allega", "camera": "Fotocamera", "microphone": "Microfono", "online": "Online", "lastSeen": "ultimo accesso", "noChats": "Nessuna chat", "startChat": "Inizia una chat", "selectChat": "Seleziona una chat per iniziare a messaggiare", "language": "LINGUA"});
+
+        Object.assign(translations.nl, {"chats": "Chats", "updates": "Updates", "calls": "Gesprekken", "contacts": "Contacten", "newChat": "Nieuwe chat", "searchChats": "Chats zoeken", "settings": "Instellingen", "profile": "Profiel", "newGroup": "Nieuwe groep", "message": "Bericht", "typeMessage": "Typ een bericht", "send": "Versturen", "attach": "Bijvoegen", "camera": "Camera", "microphone": "Microfoon", "online": "Online", "lastSeen": "laatst gezien", "noChats": "Nog geen chats", "startChat": "Een chat starten", "selectChat": "Selecteer een chat om berichten te sturen", "language": "TAAL"});
+
+        Object.assign(translations.tr, {"chats": "Sohbetler", "updates": "Güncellemeler", "calls": "Aramalar", "contacts": "Kişiler", "newChat": "Yeni sohbet", "searchChats": "Sohbetlerde ara", "settings": "Ayarlar", "profile": "Profil", "newGroup": "Yeni grup", "message": "Mesaj", "typeMessage": "Bir mesaj yazın", "send": "Gönder", "attach": "Ekle", "camera": "Kamera", "microphone": "Mikrofon", "online": "Çevrimiçi", "lastSeen": "son görülme", "noChats": "Henüz sohbet yok", "startChat": "Sohbet başlat", "selectChat": "Mesajlaşmaya başlamak için bir sohbet seçin", "language": "DİL"});
+
+        Object.assign(translations.ar, {"chats": "الدردشات", "updates": "التحديثات", "calls": "المكالمات", "contacts": "جهات الاتصال", "newChat": "دردشة جديدة", "searchChats": "البحث في الدردشات", "settings": "الإعدادات", "profile": "الملف الشخصي", "newGroup": "مجموعة جديدة", "message": "رسالة", "typeMessage": "اكتب رسالة", "send": "إرسال", "attach": "إرفاق", "camera": "الكاميرا", "microphone": "الميكروفون", "online": "متصل", "lastSeen": "آخر ظهور", "noChats": "لا توجد دردشات بعد", "startChat": "ابدأ دردشة", "selectChat": "اختر دردشة لبدء المراسلة", "language": "اللغة"});
+
+        Object.assign(translations.hi, {"chats": "चैट", "updates": "अपडेट", "calls": "कॉल", "contacts": "संपर्क", "newChat": "नई चैट", "searchChats": "चैट खोजें", "settings": "सेटिंग्स", "profile": "प्रोफ़ाइल", "newGroup": "नया समूह", "message": "संदेश", "typeMessage": "संदेश लिखें", "send": "भेजें", "attach": "संलग्न करें", "camera": "कैमरा", "microphone": "माइक्रोफ़ोन", "online": "ऑनलाइन", "lastSeen": "अंतिम बार देखा गया", "noChats": "अभी कोई चैट नहीं", "startChat": "चैट शुरू करें", "selectChat": "मैसेजिंग शुरू करने के लिए चैट चुनें", "language": "भाषा"});
+
+        Object.assign(translations.bn, {"chats": "চ্যাট", "updates": "আপডেট", "calls": "কল", "contacts": "পরিচিতি", "newChat": "নতুন চ্যাট", "searchChats": "চ্যাট খুঁজুন", "settings": "সেটিংস", "profile": "প্রোফাইল", "newGroup": "নতুন গ্রুপ", "message": "বার্তা", "typeMessage": "বার্তা লিখুন", "send": "পাঠান", "attach": "সংযুক্ত করুন", "camera": "ক্যামেরা", "microphone": "মাইক্রোফোন", "online": "অনলাইন", "lastSeen": "শেষ দেখা", "noChats": "এখনও কোনো চ্যাট নেই", "startChat": "চ্যাট শুরু করুন", "selectChat": "মেসেজিং শুরু করতে একটি চ্যাট নির্বাচন করুন", "language": "ভাষা"});
+
+        Object.assign(translations.zh, {"chats": "聊天", "updates": "动态", "calls": "通话", "contacts": "联系人", "newChat": "新聊天", "searchChats": "搜索聊天", "settings": "设置", "profile": "个人资料", "newGroup": "新群组", "message": "消息", "typeMessage": "输入消息", "send": "发送", "attach": "附件", "camera": "相机", "microphone": "麦克风", "online": "在线", "lastSeen": "最后上线", "noChats": "还没有聊天", "startChat": "开始聊天", "selectChat": "选择一个聊天开始发送消息", "language": "语言"});
+
+        Object.assign(translations.ja, {"chats": "チャット", "updates": "アップデート", "calls": "通話", "contacts": "連絡先", "newChat": "新しいチャット", "searchChats": "チャットを検索", "settings": "設定", "profile": "プロフィール", "newGroup": "新しいグループ", "message": "メッセージ", "typeMessage": "メッセージを入力", "send": "送信", "attach": "添付", "camera": "カメラ", "microphone": "マイク", "online": "オンライン", "lastSeen": "最終アクセス", "noChats": "まだチャットはありません", "startChat": "チャットを開始", "selectChat": "チャットを選択してメッセージを開始", "language": "言語"});
+
+        Object.assign(translations.ko, {"chats": "채팅", "updates": "업데이트", "calls": "통화", "contacts": "연락처", "newChat": "새 채팅", "searchChats": "채팅 검색", "settings": "설정", "profile": "프로필", "newGroup": "새 그룹", "message": "메시지", "typeMessage": "메시지 입력", "send": "보내기", "attach": "첨부", "camera": "카메라", "microphone": "마이크", "online": "온라인", "lastSeen": "마지막 접속", "noChats": "아직 채팅이 없습니다", "startChat": "채팅 시작", "selectChat": "메시지를 시작할 채팅을 선택하세요", "language": "언어"});
+
+    function getLanguage() {
+        return (
+            localStorage.getItem(KEY) ||
+            "en"
+        );
+    }
+
+    function setLanguage(language) {
+        if (!translations[language]) {
+            language = "en";
+        }
+
+        localStorage.setItem(KEY, language);
+
+        document.documentElement.lang =
+            language;
+
+        document.documentElement.dir =
+            language === "ar"
+                ? "rtl"
+                : "ltr";
+
+        apply();
+
+        window.dispatchEvent(
+            new CustomEvent(
+                "wfc-language-change",
+                {
+                    detail: { language }
+                }
+            )
+        );
+    }
+
+    function t(key) {
+        const language = getLanguage();
+
+        return (
+            translations[language]?.[key] ||
+            translations.en[key] ||
+            key
+        );
+    }
+
+    function apply() {
+        const language = getLanguage();
+
+        document.documentElement.lang =
+            language;
+
+        document.documentElement.dir =
+            language === "ar"
+                ? "rtl"
+                : "ltr";
+
+        document
+            .querySelectorAll("[data-i18n]")
+            .forEach(element => {
+                const key =
+                    element.dataset.i18n;
+
+                element.textContent =
+                    t(key);
+            });
+
+        document
+            .querySelectorAll("[data-i18n-placeholder]")
+            .forEach(element => {
+                element.placeholder =
+                    t(
+                        element
+                            .dataset
+                            .i18nPlaceholder
+                    );
+            });
+
+        document
+            .querySelectorAll(
+                "[data-i18n-aria-label]"
+            )
+            .forEach(element => {
+                element.setAttribute(
+                    "aria-label",
+                    t(
+                        element
+                            .dataset
+                            .i18nAriaLabel
+                    )
+                );
+            });
+    }
+
+    window.WFC_I18N = {
+        getLanguage,
+        setLanguage,
+        t,
+        apply,
+        translations
+    };
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+        document.addEventListener(
+            "DOMContentLoaded",
+            apply
+        );
+    } else {
+        apply();
+    }
+})();

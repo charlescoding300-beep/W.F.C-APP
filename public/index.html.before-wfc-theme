@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00a884">
+    <title>W.F.C'sChat</title>
+    <link rel="stylesheet" href="/style.css?v=30">
+    <link rel="stylesheet" href="/wfc-global.css?v=1">
+</head>
+
+<body>
+
+    <main class="welcome-screen">
+
+        <header class="brand">
+            <div class="brand-mark" aria-hidden="true">🐺</div>
+            <div class="brand-name">W.F.C'sChat</div>
+        </header>
+
+        <section class="welcome-content">
+
+            <div class="welcome-copy">
+                <h1><span data-i18n="welcome">Welcome to</span><br>W.F.C'sChat</h1>
+
+                <p data-i18n="connect">
+                    Connect with people around the world.
+                </p>
+            </div>
+
+            <div class="welcome-actions">
+
+                <button
+                    type="button"
+                    class="language-selector"
+                    id="languageSelector"
+                    aria-controls="languagePanel"
+                    aria-expanded="false"
+                >
+                    <span class="language-info">
+                        <span class="language-icon" aria-hidden="true">🌐</span>
+
+                        <span class="language-text">
+                            <span class="language-label" data-i18n="language">LANGUAGE</span>
+                            <span class="language-current" id="currentLanguage">
+                                English
+                            </span>
+                        </span>
+                    </span>
+
+                    <span class="language-chevron" aria-hidden="true">›</span>
+                </button>
+
+                <p class="terms">
+                    <span data-i18n="terms">By continuing, you agree to</span>
+                    <a href="#" data-i18n="termsLink">Terms &amp; Conditions</a>
+                    <span>and</span>
+                    <a href="#" data-i18n="privacy">Privacy Policy</a>.
+                </p>
+
+                <button
+                    type="button"
+                    class="get-started"
+                    id="getStarted"
+                >
+                    <span data-i18n="getStarted">Get started</span>
+                    <span class="start-arrow" aria-hidden="true">→</span>
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <section
+        class="language-panel"
+        id="languagePanel"
+        aria-hidden="true"
+    >
+
+        <div class="language-panel-inner">
+
+            <header class="language-header">
+                <button
+                    type="button"
+                    class="back-button"
+                    id="closeLanguage"
+                    aria-label="Back"
+                    data-i18n-aria-label="back"
+                >
+                    ←
+                </button>
+
+                <h2 data-i18n="selectLanguage">Select language</h2>
+            </header>
+
+            <div class="language-list">
+
+                <button type="button" data-language="English">
+                    English
+                </button>
+
+                <button type="button" data-language="Français">
+                    Français
+                </button>
+
+                <button type="button" data-language="Español">
+                    Español
+                </button>
+
+                <button type="button" data-language="Português">
+                    Português
+                </button>
+
+                <button type="button" data-language="Deutsch">
+                    Deutsch
+                </button>
+
+                <button type="button" data-language="Italiano">
+                    Italiano
+                </button>
+
+                <button type="button" data-language="Nederlands">
+                    Nederlands
+                </button>
+
+                <button type="button" data-language="Türkçe">
+                    Türkçe
+                </button>
+
+                <button type="button" data-language="العربية">
+                    العربية
+                </button>
+
+                <button type="button" data-language="हिन्दी">
+                    हिन्दी
+                </button>
+
+                <button type="button" data-language="বাংলা">
+                    বাংলা
+                </button>
+
+                <button type="button" data-language="中文">
+                    中文
+                </button>
+
+                <button type="button" data-language="日本語">
+                    日本語
+                </button>
+
+                <button type="button" data-language="한국어">
+                    한국어
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="/wfc-language.js?v=3"></script>
+    <script src="/i18n.js?v=2"></script>
+    <script src="/welcome.js?v=32"></script>
+
+</body>
+</html>

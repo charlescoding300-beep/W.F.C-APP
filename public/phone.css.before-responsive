@@ -1,0 +1,654 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background: #ffffff;
+
+    color: #111b21;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* =========================
+   MAIN
+   ========================= */
+
+.phone-screen {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background:
+        radial-gradient(
+            circle at 50% 0,
+            #e8f8f3 0,
+            #ffffff 42%
+        );
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.phone-header {
+    height: 74px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 22px;
+
+    border-bottom: 1px solid #edf2ef;
+
+    background: rgba(255,255,255,.96);
+}
+
+.back-button {
+    width: 44px;
+    height: 44px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #e8f7f2;
+
+    color: #008f72;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-left: 13px;
+
+    color: #008f72;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.header-logo {
+    font-size: 25px;
+}
+
+
+/* =========================
+   CONTENT
+   ========================= */
+
+.phone-content {
+    width: 100%;
+    max-width: 460px;
+
+    margin: 0 auto;
+
+    padding:
+        48px
+        22px
+        40px;
+}
+
+.intro {
+    text-align: center;
+}
+
+.intro h1 {
+    font-size: 31px;
+    line-height: 1.15;
+
+    letter-spacing: -1px;
+}
+
+.intro p {
+    margin-top: 13px;
+
+    color: #667781;
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   COUNTRY SELECTOR
+   ========================= */
+
+.country-selector {
+    width: 100%;
+    min-height: 74px;
+
+    display: flex;
+    align-items: center;
+
+    margin-top: 35px;
+
+    padding: 10px 17px;
+
+    border: 1px solid #d9e5e0;
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    box-shadow:
+        0 8px 25px rgba(17,27,33,.06);
+}
+
+.selected-flag {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e8f7f2;
+
+    font-size: 25px;
+}
+
+.selected-country {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    margin-left: 13px;
+}
+
+.selected-country-name {
+    color: #111b21;
+
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.selected-country-code {
+    color: #667781;
+
+    font-size: 13px;
+}
+
+.country-arrow {
+    margin-left: auto;
+
+    color: #008f72;
+
+    font-size: 29px;
+}
+
+
+/* =========================
+   PHONE INPUT
+   ========================= */
+
+.phone-input-row {
+    width: 100%;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+
+    margin-top: 15px;
+
+    padding: 0 17px;
+
+    border: 1px solid #d9e5e0;
+    border-radius: 17px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(17,27,33,.04);
+}
+
+.phone-code {
+    padding-right: 13px;
+
+    color: #008f72;
+
+    font-weight: 700;
+
+    border-right: 1px solid #dce5e1;
+}
+
+.phone-input-row input {
+    width: 100%;
+
+    height: 100%;
+
+    padding-left: 13px;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: #111b21;
+
+    font-size: 18px;
+}
+
+.phone-input-row input::placeholder {
+    color: #9aa7ac;
+}
+
+
+/* =========================
+   ERROR
+   ========================= */
+
+.phone-error {
+    min-height: 20px;
+
+    margin-top: 8px;
+
+    color: #d93025;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   CONTINUE
+   ========================= */
+
+.continue-button {
+    width: 100%;
+    min-height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 16px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00b894,
+            #008f72
+        );
+
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 28px rgba(0,143,114,.22);
+}
+
+.continue-button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   NOTE
+   ========================= */
+
+.security-note {
+    max-width: 330px;
+
+    margin: 18px auto 0;
+
+    color: #86939a;
+
+    font-size: 11px;
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+
+/* =========================
+   COUNTRY PANEL
+   ========================= */
+
+.country-panel {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transform: translateX(100%);
+
+    transition:
+        transform .25s ease,
+        opacity .2s ease,
+        visibility 0s linear .25s;
+}
+
+.country-panel.open {
+    visibility: visible;
+    opacity: 1;
+
+    transform: translateX(0);
+
+    transition:
+        transform .25s ease,
+        opacity .2s ease;
+}
+
+.country-panel-inner {
+    width: 100%;
+    max-width: 650px;
+
+    min-height: 100%;
+
+    margin: 0 auto;
+
+    padding: 20px 20px 40px;
+}
+
+
+/* =========================
+   COUNTRY HEADER
+   ========================= */
+
+.country-header {
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.country-back {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: #e8f7f2;
+
+    color: #008f72;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+.country-header h2 {
+    font-size: 23px;
+}
+
+
+/* =========================
+   SEARCH
+   ========================= */
+
+.country-search {
+    width: 100%;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+    padding: 0 15px;
+
+    border-radius: 14px;
+
+    background: #f0f2f5;
+}
+
+.country-search span {
+    color: #667781;
+
+    font-size: 25px;
+}
+
+.country-search input {
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: #111b21;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   COUNTRY LIST
+   ========================= */
+
+.country-list {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 12px;
+}
+
+.country-item {
+    width: 100%;
+    min-height: 66px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 8px 10px;
+
+    border: 0;
+    border-bottom: 1px solid #edf1ef;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+.country-item:hover {
+    background: #f1f8f5;
+}
+
+.country-flag {
+    width: 43px;
+
+    font-size: 26px;
+
+    text-align: center;
+}
+
+.country-details {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    margin-left: 12px;
+}
+
+.country-name {
+    color: #111b21;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.country-calling {
+    color: #667781;
+
+    font-size: 13px;
+}
+
+.no-countries {
+    padding: 40px 10px;
+
+    color: #86939a;
+
+    text-align: center;
+}
+
+
+/* =========================
+   SMALL SCREENS
+   ========================= */
+
+@media (max-width: 480px) {
+
+    .phone-content {
+        padding-top: 38px;
+    }
+
+    .intro h1 {
+        font-size: 28px;
+    }
+
+    .country-selector {
+        margin-top: 28px;
+    }
+}
+
+/* FLAG DISPLAY */
+.flag-emoji {
+    font-family:
+        "Noto Color Emoji",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Twemoji Mozilla",
+        sans-serif;
+
+    font-size: 27px;
+    line-height: 1;
+}
+
+.selected-flag .flag-emoji {
+    font-size: 26px;
+}
+
+
+/* WORLD COUNTRY EMOJI FLAGS */
+.flag-emoji {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family:
+        "Noto Color Emoji",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Twemoji Mozilla",
+        sans-serif;
+    font-size: 28px;
+    line-height: 1;
+}
+
+.selected-flag .flag-emoji {
+    font-size: 27px;
+}
+
+/* REAL COUNTRY FLAGS */
+.country-flag img {
+    width: 34px;
+    height: 24px;
+    display: block;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+
+.selected-flag img {
+    width: 36px;
+    height: 25px;
+    display: block;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+
+/* REAL COUNTRY FLAGS */
+.country-flag {
+    width: 52px;
+    min-width: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.country-flag img {
+    width: 36px;
+    height: 24px;
+    display: block;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.18);
+}
+
+.selected-flag img {
+    width: 38px;
+    height: 26px;
+    display: block;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.18);
+}
