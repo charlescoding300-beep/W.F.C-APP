@@ -1,55 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" data-chat-density="medium">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#00a884">
-    <title>W.F.C'sChat</title>
+    <link rel="manifest" href="/wfc.webmanifest?v=1">
+    <link rel="icon" href="/wfc-pwa-icon.svg" type="image/svg+xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#008069">
+    <script src="/wfc-theme.js?v=2"></script>
+    <script src="/wfc-pwa.js?v=1" defer></script>
+    <title>W.F.C Messenger</title>
 
-    <link rel="stylesheet" href="/wfc-global.css?v=1">
-    <link rel="stylesheet" href="/chat.css?v=2">
+    <link rel="stylesheet" href="/wfc-global.css?v=2">
+    <link rel="stylesheet" href="/chat.css?v=45">
+    <link rel="stylesheet" href="/wfc-telegram.css?v=10">
+    <link rel="stylesheet" href="/zenx-ai.css?v=1">
+    <link rel="stylesheet" href="/wfc-chat-polish.css?v=12">
+    <link rel="stylesheet" href="/wfc-vector-theme.css?v=2">
+    <link rel="stylesheet" href="/wfc-chat-vector.css?v=20">
+    <link rel="stylesheet" href="/wfc-device-link.css?v=1">
+    <link rel="stylesheet" href="/wfc-visual-upgrade.css?v=4">
+    <link rel="stylesheet" href="/wfc-visual-final.css?v=10">
+    <link rel="stylesheet" href="/wfc-android-ui.css?v=4">
 </head>
 
 <body class="chat-page">
 
 <main class="chat-app">
+    <div id="appNotice" class="app-notice" role="status" aria-live="polite"></div>
 
     <!-- CHAT HOME -->
     <section id="chatHome" class="chat-screen">
 
-        <header class="chat-topbar">
-            <div class="chat-brand">
-                <div class="chat-logo">🐺</div>
+        <nav class="workspace-rail" aria-label="W.F.C navigation">
+            <a class="rail-brand" href="/" aria-label="W.F.C home">W</a>
+            <div class="rail-actions">
+                <button id="railChats" class="rail-button active app-nav-button" data-app-nav="chats" type="button" aria-label="Chats" title="Chats"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v11H9l-5 3v-14Z"/><path d="M8 9h8M8 13h5"/></svg><b class="nav-unread-count hidden" data-unread-count></b></button>
+                <button id="railCalls" class="rail-button app-nav-button" data-app-nav="calls" type="button" aria-label="Calls" title="Calls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5 10 8l-2 2c1.2 2.4 3.1 4.3 5.5 5.5l2-2 4.5 3c.4.3.6.8.4 1.3l-.8 2.1a1.5 1.5 0 0 1-1.5 1C9.5 20.4 3.6 14.5 3.1 7.9a1.5 1.5 0 0 1 1-1.5l2.1-.8c.3-.1.6-.1.8-.1Z"/></svg></button>
+                <button id="railUpdates" class="rail-button app-nav-button" data-app-nav="updates" type="button" aria-label="Status" title="Status"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.3 2"/></svg></button>
+                <button id="railTools" class="rail-button app-nav-button" data-app-nav="tools" type="button" aria-label="Tools" title="Tools"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6.5 3-3 3 3-3 3zM4 20l8.7-8.7M5 5l4 4m-6 1 5-5m3 7 8 8"/></svg></button>
+            </div>
+            <div class="rail-bottom">
+                <button id="railAI" class="rail-button rail-ai-button" type="button" aria-label="ZENX AI verified assistant" title="ZENX AI"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.1 7.1L21 12l-6.9 2.1L12 21l-2.1-6.9L3 12l6.9-2.9L12 2Z"/><path d="m19 2 .7 2.3L22 5l-2.3.7L19 8l-.7-2.3L16 5l2.3-.7L19 2Z"/></svg></button>
+                <button id="railSettings" class="rail-button" type="button" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19 13.5 1.1 1.8-2 2-1.9-1a7 7 0 0 1-1.6.7l-.5 2h-2.8l-.5-2a7 7 0 0 1-1.6-.7l-1.9 1-2-2L6.4 13.5a7 7 0 0 1 0-1.8l-1.1-1.8 2-2 1.9 1a7 7 0 0 1 1.6-.7l.5-2h2.8l.5 2a7 7 0 0 1 1.6.7l1.9-1 2 2-1.1 1.8a7 7 0 0 1 0 1.8Z"/></svg></button>
+                <button id="railProfile" class="rail-profile" type="button" aria-label="Your profile">W</button>
+            </div>
+        </nav>
 
-                <div>
-                    <strong>W.F.C'sChat</strong>
-                    <span id="chatUserName">W.F.C'sChat</span>
-                </div>
+        <header class="chat-topbar">
+            <div class="chat-brand chat-brand-wordmark">
+                <strong>W.F.C</strong>
             </div>
 
             <div class="chat-actions">
-                <button
-                    id="languageButton"
-                    type="button"
-                    class="icon-button"
-                    aria-label="Language">
-                    🌐
+                <button id="androidCameraButton" type="button" class="android-action-button" aria-label="Open status" title="Status">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 7.5h4l1.7-2h5.6l1.7 2h4A1.5 1.5 0 0 1 22 9v9.5a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5V9a1.5 1.5 0 0 1 1.5-1.5Z"/><circle cx="12" cy="13" r="3.2"/></svg>
                 </button>
-
-                <button
-                    id="settingsButton"
-                    type="button"
-                    class="icon-button"
-                    data-i18n-aria-label="settings"
-                    aria-label="Settings">
-                    ⚙
+                <button id="androidSearchButton" type="button" class="android-action-button" aria-label="Search chats" aria-expanded="false" title="Search">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.5 15.5 4 4"/></svg>
                 </button>
+                <button
+                    id="overflowButton"
+                    type="button"
+                    class="icon-button overflow-trigger"
+                    aria-label="More options"
+                    aria-haspopup="menu"
+                    aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
             </div>
         </header>
 
         <section class="chat-search">
             <div class="search-box">
-                <span aria-hidden="true">⌕</span>
+                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.5 15.5 4 4"/></svg>
 
                 <input
                     id="chatSearch"
@@ -59,30 +80,13 @@
             </div>
         </section>
 
-        <nav class="chat-tabs" aria-label="Navigation">
-            <button
-                class="chat-tab active"
-                type="button"
-                data-tab="chats"
-                data-i18n="chats">
-                Chats
-            </button>
 
-            <button
-                class="chat-tab"
-                type="button"
-                data-tab="updates"
-                data-i18n="updates">
-                Updates
-            </button>
 
-            <button
-                class="chat-tab"
-                type="button"
-                data-tab="calls"
-                data-i18n="calls">
-                Calls
-            </button>
+        <nav class="chat-filters" aria-label="Filter chats" role="group">
+            <button class="chat-filter active" type="button" data-chat-filter="all" aria-pressed="true">All</button>
+            <button class="chat-filter" type="button" data-chat-filter="unread" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.5h14v10H9l-4 2.5v-12.5Z"/><path d="M9 10.5h6"/></svg><span>Unread</span></button>
+            <button class="chat-filter" type="button" data-chat-filter="favorites" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg><span>Favorites</span></button>
+            <button class="chat-filter" type="button" data-chat-filter="groups" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3.5 19c.3-3.3 2.1-5 5.5-5s5.2 1.7 5.5 5H3.5Zm11.4-4.3c2.9-.2 4.7 1.2 5 4.3h-3.7"/></svg><span>Groups</span></button>
         </nav>
 
         <section
@@ -95,11 +99,33 @@
             class="floating-button"
             type="button"
             data-i18n-aria-label="newChat"
-            aria-label="New chat">
-            ✎
+            aria-label="Saved contacts">
+            <span class="floating-inner"><span class="floating-plus" aria-hidden="true">+</span></span>
         </button>
 
     </section>
+
+
+        <nav class="chat-tabs app-primary-nav" data-phone-nav="bottom" aria-label="Main navigation">
+            <button class="chat-tab active app-nav-button" type="button" data-app-nav="chats" aria-current="page">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v11H9l-5 3v-14Z"/><path d="M8 9h8M8 13h5"/></svg><span>Chats</span><b class="nav-unread-count hidden" data-unread-count></b>
+            </button>
+            <button class="chat-tab app-nav-button" type="button" data-app-nav="calls">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5 10 8l-2 2c1.2 2.4 3.1 4.3 5.5 5.5l2-2 4.5 3c.4.3.6.8.4 1.3l-.8 2.1a1.5 1.5 0 0 1-1.5 1C9.5 20.4 3.6 14.5 3.1 7.9a1.5 1.5 0 0 1 1-1.5l2.1-.8c.3-.1.6-.1.8-.1Z"/></svg><span>Calls</span>
+            </button>
+            <button class="chat-tab app-nav-button" type="button" data-app-nav="updates">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.3 2"/></svg><span>Status</span>
+            </button>
+            <button class="chat-tab app-nav-button" type="button" data-app-nav="tools">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6.5 3-3 3 3-3 3zM4 20l8.7-8.7M5 5l4 4m-6 1 5-5m3 7 8 8"/></svg><span>Tools</span>
+            </button>
+        </nav>
+
+    <!-- DESKTOP START PANEL -->
+    <section id="emptyConversation" class="empty-conversation-screen" aria-label="W.F.C chat home">
+<div class="chat-start-card"><div class="chat-start-art" aria-hidden="true"><img src="/motion/chat-empty-v4.svg?v=1" alt=""></div><span class="chat-start-eyebrow">W.F.C MESSENGER</span><h1>Your conversations, at a glance.</h1><p>Choose a conversation from the list, or start a new one when you’re ready.</p><div class="chat-start-actions"><button id="emptyFindPeople" type="button">New chat</button><button id="emptyInvitePeople" type="button">Invite a friend</button></div><div class="chat-start-foot"><span class="status-dot"></span> Your W.F.C chats stay in sync</div></div>
+</section>
+
 
 
     <!-- CONVERSATION -->
@@ -112,22 +138,20 @@
                 type="button"
                 class="icon-button"
                 data-i18n-aria-label="back"
-                aria-label="Back">
-                ←
-            </button>
+                aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7M8 12h12"/></svg></button>
 
             <div class="conversation-person">
 
                 <div
                     id="conversationAvatar"
                     class="conversation-avatar">
-                    👤
+                    <svg class="avatar-placeholder" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5Zm0 2c-4.8 0-8 2.5-8 6.2 0 .5.4.8.9.8h14.2c.5 0 .9-.3.9-.8 0-3.7-3.2-6.2-8-6.2Z"/></svg>
                 </div>
 
                 <div class="conversation-person-info">
-                    <strong id="conversationName">
-                        Chat
-                    </strong>
+                    <strong id="conversationName">Chat</strong>
+                    <span id="userPhoneVerifiedBadge" class="phone-verified-badge hidden" role="img" aria-label="Phone number verified by SMS" title="Phone number verified by SMS"><svg class="vector-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span>
+                    <span id="zenxVerifiedBadge" class="verified-badge hidden" role="img" aria-label="Verified assistant" title="Verified assistant"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.4 12.2 3l2.7-.1.9 2.5 2.2 1.5-.8 2.6.8 2.6-2.2 1.5-.9 2.5-2.7-.1L10 18l-2.2-1.6-2.7.1-.9-2.5L2 12.5l.8-2.6L2 7.3l2.2-1.5.9-2.5 2.7.1L10 1.4Z"/><path d="m6.5 10.1 2.2 2.2 4.8-4.8"/></svg></span>
 
                     <span id="conversationStatus">
                         offline
@@ -136,16 +160,19 @@
 
             </div>
 
-            <button
-                id="conversationMore"
-                type="button"
-                class="icon-button"
-                aria-label="More">
-                ⋮
-            </button>
+            <div class="conversation-header-actions">
+                    <button id="conversationMenuButton" type="button" class="icon-button" aria-label="Conversation options" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+            </div>
 
         </header>
 
+
+        <section id="dmSearchPanel" class="conversation-search-panel hidden" aria-label="Search this chat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.5 15.5 4 4"/></svg>
+            <input id="dmSearchInput" type="search" placeholder="Search messages in this chat" aria-label="Search messages in this chat">
+            <span id="dmSearchResultCount" aria-live="polite"></span>
+            <button id="dmSearchClose" type="button" aria-label="Close chat search">×</button>
+        </section>
 
         <section
             id="messageList"
@@ -153,39 +180,75 @@
         </section>
 
 
+        <section id="stickerTray" class="sticker-tray hidden" aria-label="Emoji, sticker and GIF picker" role="dialog" aria-modal="false">
+<header class="media-picker-header"><div><span class="media-picker-eyebrow">W.F.C MESSENGER</span><strong>Express yourself</strong></div><button id="stickerTrayClose" class="media-picker-close" type="button" aria-label="Close picker"><svg class="vector-close" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header>
+<div class="media-picker-tabs" role="tablist" aria-label="Choose media type"><button type="button" role="tab" data-picker-tab="emoji" aria-selected="false">Emoji</button><button type="button" role="tab" data-picker-tab="stickers" aria-selected="true">Stickers</button><button type="button" role="tab" data-picker-tab="gifs" aria-selected="false">GIFs</button></div>
+<section id="emojiPickerPane" class="media-picker-pane hidden" data-picker-pane="emoji"><div class="emoji-picker-toolbar"><strong>Emoji</strong><input id="emojiSearch" type="search" placeholder="Search emoji" aria-label="Search emoji"></div><div id="emojiGrid" class="emoji-grid" role="group" aria-label="Emoji choices"></div></section>
+<section id="stickerPickerPane" class="media-picker-pane" data-picker-pane="stickers"><div class="sticker-section-title"><span>My sticker packs</span><small>Saved on this device</small></div><div id="installedStickerGrid" class="sticker-picker-grid" role="group" aria-label="Installed W.F.C stickers"></div><div class="sticker-section-title discover-sticker-title"><span>Discover packs</span><small>W.F.C sticker packs</small></div><div id="stickerPackShop" class="sticker-pack-shop"></div></section>
+<section id="gifPickerPane" class="media-picker-pane hidden" data-picker-pane="gifs"><div class="gif-picker-toolbar"><input id="gifSearch" type="search" placeholder="Find a reaction" aria-label="Filter GIFs or search Wikimedia Commons"><button id="gifCommonsSearch" class="gif-web-search" type="button" title="Search openly licensed GIFs on Wikimedia Commons">Search web</button><label class="gif-upload-button">Add GIF<input id="gifUploadInput" type="file" accept="image/gif" hidden></label></div><p id="gifPickerNote" class="gif-picker-note">Human reactions from Wikimedia Commons include creator, source, and license credit when shared. Search for wave, happy, or applause.</p><div id="gifGrid" class="gif-picker-grid" role="group" aria-label="GIFs from W.F.C and Wikimedia Commons"></div></section>
+</section>
+        <section id="voiceNoteReview" class="voice-note-review hidden" aria-label="Review voice note">
+            <div class="voice-note-review-heading"><div><strong>Voice note</strong><small>Listen back before sending</small></div><label class="voice-once-toggle"><input id="voiceNoteViewOnce" type="checkbox"><span class="voice-once-eye" aria-hidden="true">◉</span> View once</label></div>
+            <audio id="voiceNotePreviewAudio" controls preload="metadata"></audio>
+            <div class="voice-note-review-actions"><button id="discardVoiceNote" type="button">Discard</button><button id="sendVoiceNote" type="button">Send voice note</button></div>
+        </section>
+        <div id="voiceRecordingStatus" class="voice-recording-status hidden" role="status" aria-live="polite"><span class="voice-recording-dot"></span><span id="voiceRecordingTime">Recording · 0:00</span><button id="stopVoiceNote" type="button">Stop</button><button id="cancelVoiceRecording" type="button" aria-label="Cancel voice recording">×</button></div>
         <form
             id="messageForm"
             class="message-composer">
 
-            <button
-                id="attachButton"
-                type="button"
-                class="composer-button"
-                aria-label="Attach">
-                ＋
+            <button id="galleryButton" type="button" class="composer-button composer-media-button" aria-label="Choose a picture from your gallery" title="Gallery">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="9.5" r="1.5"/><path d="m5 17 4.2-4 2.8 2.5 2.8-2.3L19 17"/></svg>
             </button>
+            <button id="composerCameraButton" type="button" class="composer-button composer-media-button" aria-label="Open camera" title="Camera">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h3l1.4-2h7.2l1.4 2h3A1.5 1.5 0 0 1 21.5 9v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z"/><circle cx="12" cy="13" r="3.4"/></svg>
+            </button>
+            <button id="stickerButton" type="button" class="composer-button sticker-button" aria-label="Open emoji, sticker and GIF picker" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14.5c.8 1.3 2 2 3.5 2s2.7-.7 3.5-2M9 9.5h.01M15 9.5h.01"/></svg></button>
+            <button id="voiceRecordButton" type="button" class="composer-button voice-record-button" aria-label="Record a voice note" title="Record a voice note"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3m-4 0h8"/></svg></button>
+            <input id="photoInput" type="file" accept="image/*" hidden>
+            <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden>
 
-            <input
+            <textarea
                 id="messageInput"
-                type="text"
+                rows="1"
                 autocomplete="off"
                 maxlength="5000"
                 data-i18n-placeholder="typeMessage"
-                placeholder="Type a message">
+                placeholder="Type a message"
+                aria-label="Message"></textarea>
 
+            <button id="sendSoundToggle" type="button" class="composer-button send-sound-toggle" aria-pressed="true" aria-label="Turn send sound off" title="Send sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path d="M16 9a5 5 0 0 1 0 6m2.5-8.5a8.5 8.5 0 0 1 0 11"/></svg></button>
             <button
                 id="sendMessageButton"
                 type="submit"
                 class="send-button"
                 data-i18n-aria-label="send"
-                aria-label="Send">
-                ➤
-            </button>
+                aria-label="Send"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 5 16 7-16 7 3-7-3-7Z"/><path d="M7 12h13"/></svg></button>
 
         </form>
 
     </section>
 
+
+    <!-- SAVED CONVERSATION CONTACTS -->
+    <section id="savedContactsScreen" class="saved-contacts-screen hidden">
+        <header class="new-chat-topbar">
+            <button id="savedContactsBack" type="button" class="icon-button" aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7M8 12h12"/></svg></button>
+            <h2>People and contacts</h2>
+        </header>
+        <p class="saved-contacts-intro">Your W.F.C contacts and recent conversations.</p>
+        <section class="phone-contact-sync" aria-labelledby="phoneContactTitle">
+            <div class="phone-contact-sync-copy"><strong id="phoneContactTitle">Find people from your phone</strong><span>Check only the contacts you choose. Your address book is not imported or saved.</span></div>
+            <div class="phone-contact-sync-actions">
+                <button id="syncPhoneContacts" type="button" class="phone-contact-sync-button">Choose phone contacts</button>
+                <label class="phone-contact-import">Import .vcf<input id="phoneContactFile" type="file" accept=".vcf,text/vcard,text/x-vcard" hidden></label>
+            </div>
+            <p id="phoneContactNote" class="phone-contact-note" role="status" aria-live="polite">Choose contacts to see who is already on W.F.C. People not registered can be invited by SMS.</p>
+            <section id="phoneContactMatches" class="phone-contact-matches" aria-live="polite"></section>
+        </section>
+        <section id="savedContactList" class="saved-contact-list"></section>
+        <button id="discoverWfcMembers" class="discover-members-button" type="button">Find W.F.C members</button>
+    </section>
 
     <!-- NEW CHAT -->
     <section
@@ -199,19 +262,15 @@
                 type="button"
                 class="icon-button"
                 data-i18n-aria-label="back"
-                aria-label="Back">
-                ←
-            </button>
+                aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7M8 12h12"/></svg></button>
 
-            <h2 data-i18n="newChat">
-                New chat
-            </h2>
+            <h2>Find people</h2>
 
         </header>
 
         <div class="new-chat-search">
             <div class="search-box">
-                <span aria-hidden="true">⌕</span>
+                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.5 15.5 4 4"/></svg>
 
                 <input
                     id="userSearch"
@@ -230,6 +289,162 @@
 </main>
 
 
+<!-- INVITE PEOPLE -->
+<section id="invitePanel" class="chat-modal" aria-hidden="true">
+    <div class="chat-modal-backdrop" data-close-invite></div>
+    <div class="chat-modal-card invite-modal-card" role="dialog" aria-modal="true" aria-labelledby="inviteTitle">
+        <header class="chat-modal-header invite-modal-titlebar">
+            <div><span class="modal-eyebrow">BRING YOUR PEOPLE</span><h2 id="inviteTitle">Invite a friend</h2></div>
+            <button id="closeInvite" class="modal-close" type="button" aria-label="Close"><svg class="vector-close" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+        </header>
+        <section class="invite-hero" aria-label="Invite friends to W.F.C">
+            <div class="invite-hero-copy"><span>YOUR PEOPLE, ONE TAP AWAY</span><h3>Good chats are better together.</h3><p>Pick someone you know and send them a personal invite to W.F.C.</p></div>
+            <div class="invite-hero-art" aria-hidden="true"><svg viewBox="0 0 180 150"><circle cx="91" cy="76" r="63" fill="#daf5e9"/><circle cx="36" cy="39" r="16" fill="#bdebd8"/><circle cx="148" cy="112" r="12" fill="#f7d68b"/><path d="M58 101c3-19 14-29 32-29s29 10 32 29v12H58z" fill="#087e67"/><circle cx="90" cy="53" r="20" fill="#f2c5a4"/><path d="M69 51c1-17 10-26 23-26 12 0 21 9 22 24-7-6-15-9-25-9-6 0-13 4-20 11" fill="#263b36"/><path d="M120 44c12 2 20 11 20 22 0 5-2 9-5 12" fill="none" stroke="#e6aa48" stroke-width="5" stroke-linecap="round"/><path d="M137 28v12m-6-6h12" stroke="#087e67" stroke-width="3" stroke-linecap="round"/><rect x="17" y="99" width="43" height="30" rx="10" fill="#fff"/><path d="M27 109h22M27 117h15" stroke="#74a89b" stroke-width="3" stroke-linecap="round"/></svg></div>
+        </section>
+        <p class="modal-intro invite-privacy-note"><span aria-hidden="true">🔒</span> Your contacts stay on your device. Only the person you choose is included in the SMS draft.</p>
+        <button id="pickContactsButton" class="contact-picker-button" type="button"><span class="invite-contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.3"/><path d="M2.8 19c.4-3.3 2.5-5 6.2-5s5.8 1.7 6.2 5M17 8v6m-3-3h6"/></svg></span><span class="invite-contact-copy"><strong>Choose from your contacts</strong><small>Search people saved on this device</small></span><span class="invite-contact-arrow" aria-hidden="true">→</span></button>
+        <p id="contactPickerNote" class="contact-picker-note" role="status">Choose one person. W.F.C checks whether they already have an account; only an invitation draft goes to Messages.</p>
+        <div class="invite-contact-fallback"><label for="manualInvitePhone">Or add someone by number</label><div><input id="manualInviteName" type="text" maxlength="80" placeholder="Friend’s name"><input id="manualInvitePhone" type="tel" maxlength="40" autocomplete="tel" placeholder="+234 801 234 5678"><button id="addManualInviteContact" type="button">Add person</button></div></div>
+        <label class="invite-vcard-picker">Import contacts from a .vcf file<input id="inviteContactFile" type="file" accept=".vcf,text/vcard,text/x-vcard" hidden></label>
+        <div id="inviteVcardChoices" class="invite-vcard-choices" aria-live="polite"></div>
+        <button id="openNativeMessages" class="copy-invite-link" type="button">Open Messages to choose a contact</button>
+        <form id="inviteForm" class="invite-form">
+            <p class="field-hint">Review the selected contacts, remove anyone you do not want to invite, then confirm. Invite one person at a time. Messages will ask before sending from your SIM.</p>
+            <div id="selectedInviteContacts" class="selected-invite-contacts" aria-live="polite"></div>
+            <p id="inviteStatus" class="invite-status" role="status" aria-live="polite"></p>
+            <button id="sendInviteButton" class="send-invite-button" type="submit">Continue to Messages</button>
+            <button id="copyInviteLink" class="copy-invite-link hidden" type="button">Copy your invite link</button>
+        </form>
+        <p class="gateway-note invite-sim-note">You stay in control. Your phone opens a ready-to-review SMS; it is sent only when you tap Send.</p>
+    </div>
+</section>
+
+<!-- OVERFLOW MENU -->
+<section id="overflowMenu" class="overflow-menu hidden" role="menu" aria-label="More options">
+    <button id="installAppButton" type="button" role="menuitem" class="hidden">Install W.F.C app</button>
+    <button id="menuNewGroup" type="button" role="menuitem"><span><svg class="vector-plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span> New group</button>
+    <button id="menuLinkDevice" type="button" role="menuitem"><span><svg class="vector-device" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M2.5 20h19M9 16v4m6-4v4"/></svg></span> Link device</button>
+    <button id="menuSettings" type="button" role="menuitem"><span><svg class="vector-gear" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19 13.5 1.1 1.8-2 2-1.9-1a7 7 0 0 1-1.6.7l-.5 2h-2.8l-.5-2a7 7 0 0 1-1.6-.7l-1.9 1-2-2 1.1-1.8a7 7 0 0 1 0-1.8l-1.1-1.8 2-2 1.9 1a7 7 0 0 1 1.6-.7l.5-2h2.8l.5 2a7 7 0 0 1 1.6.7l1.9-1 2 2-1.1 1.8a7 7 0 0 1 0 1.8Z"/></svg></span> Settings</button>
+</section>
+
+<section id="chatActionMenu" class="overflow-menu chat-action-menu hidden" role="menu" aria-label="Conversation options">
+    <button type="button" role="menuitem" data-private-only data-chat-action="contact"><span>◎</span> View contact</button>
+    <button type="button" role="menuitem" data-chat-action="search"><span>⌕</span> Search</button>
+    <button type="button" role="menuitem" data-chat-action="media"><span>▧</span> Media, links and docs</button>
+    <button type="button" role="menuitem" id="chatActionList" data-private-only data-chat-action="list"><span>☆</span> Add to list</button>
+    <button type="button" role="menuitem" id="chatActionMute" data-private-only data-chat-action="mute"><span>◖</span> Mute notifications</button>
+    <button type="button" role="menuitem" data-private-only data-chat-action="new-group"><span>＋</span> New group</button>
+    <button type="button" role="menuitem" id="chatActionMore" aria-expanded="false"><span>⋯</span> More</button>
+    <div id="chatMoreMenuItems" class="chat-more-menu-items hidden">
+        <button type="button" role="menuitem" data-chat-action="theme"><span>◐</span> Chat theme</button>
+        <button type="button" role="menuitem" data-private-only data-chat-action="report"><span>⚑</span> Report</button>
+        <button type="button" role="menuitem" id="chatActionBlock" data-private-only data-chat-action="block"><span>⊘</span> Block</button>
+        <button type="button" role="menuitem" data-chat-action="clear"><span>⌫</span> Clear chat</button>
+        <button type="button" role="menuitem" data-chat-action="export"><span>⇩</span> Export chat</button>
+        <button type="button" role="menuitem" data-chat-action="shortcut"><span>↗</span> Add shortcut</button>
+    </div>
+</section>
+
+<section id="chatDetailsPanel" class="chat-modal" aria-hidden="true">
+    <div class="chat-modal-backdrop" data-close-chat-details></div>
+    <div class="chat-modal-card chat-details-card" role="dialog" aria-modal="true" aria-labelledby="chatDetailsTitle">
+        <header class="chat-modal-header"><div><span class="modal-eyebrow">W.F.C CHAT</span><h2 id="chatDetailsTitle">View contact</h2></div><button id="closeChatDetails" class="modal-close" type="button" aria-label="Close">×</button></header>
+        <div id="chatDetailsContent" class="chat-details-content"></div>
+    </div>
+</section>
+
+<!-- LIVE CAMERA -->
+<section id="cameraPanel" class="chat-modal" aria-hidden="true">
+    <div class="chat-modal-backdrop" data-close-camera></div>
+    <div class="chat-modal-card camera-modal-card" role="dialog" aria-modal="true" aria-labelledby="cameraTitle">
+        <header class="chat-modal-header"><div><span class="modal-eyebrow">CAMERA</span><h2 id="cameraTitle">Take a photo</h2></div><button id="closeCamera" class="modal-close" type="button" aria-label="Close"><svg class="vector-close" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header>
+        <div class="live-camera-frame"><video id="cameraVideo" autoplay playsinline muted></video></div>
+        <p id="cameraStatus" class="invite-status" role="status" aria-live="polite">Your camera starts only after you allow access.</p>
+        <button id="takePhotoButton" class="photo-confirm camera-snap-button" type="button" aria-label="Capture photo"><svg class="vector-shutter" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2"/></svg></button>
+        <button id="cameraFallbackButton" class="copy-invite-link hidden" type="button">Choose a photo instead</button>
+    </div>
+</section>
+
+<!-- PHOTO REVIEW -->
+<section id="photoPreviewPanel" class="chat-modal" aria-hidden="true">
+    <div class="chat-modal-backdrop" data-close-photo></div>
+    <div class="chat-modal-card photo-modal-card" role="dialog" aria-modal="true" aria-labelledby="photoPreviewTitle">
+        <header class="chat-modal-header"><div><span class="modal-eyebrow">PHOTO</span><h2 id="photoPreviewTitle">Review your picture</h2></div><button id="closePhotoPreview" class="modal-close" type="button" aria-label="Close"><svg class="vector-close" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header>
+        <div class="photo-preview-frame"><img id="photoPreviewImage" alt="Photo selected to send"></div>
+        <label for="photoCaption">Caption or message</label>
+        <textarea id="photoCaption" class="photo-caption-input" rows="2" maxlength="1200" placeholder="Add a message with this picture"></textarea>
+        <label>Send to conversations</label>
+        <p class="photo-recipient-hint">Choose one or more people or groups. This chat is selected for you.</p>
+        <div id="photoRecipientList" class="photo-recipient-list" role="group" aria-label="Choose photo recipients"></div>
+        <p id="photoStatus" class="invite-status" role="status" aria-live="polite"></p>
+        <div class="photo-actions"><button id="cancelPhotoSend" class="photo-cancel" type="button">Back</button><button id="confirmPhotoSendButton" class="photo-confirm" type="button" aria-label="Confirm and send photo"><svg class="vector-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></button></div>
+    </div>
+</section>
+
+<!-- NEW GROUP -->
+<section id="groupPanel" class="chat-modal group-wizard-overlay" aria-hidden="true">
+    <div class="chat-modal-backdrop" data-close-group></div>
+    <div class="chat-modal-card group-modal-card" role="dialog" aria-modal="true" aria-labelledby="groupTitle">
+        <header class="chat-modal-header group-wizard-header">
+            <div class="group-header-leading"><button id="groupBack" class="group-back-button hidden" type="button" aria-label="Back to group details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7M8 12h12"/></svg></button><div><span class="modal-eyebrow">YOUR COMMUNITY</span><h2 id="groupTitle">New group</h2></div></div>
+            <button id="closeGroup" class="modal-close" type="button" aria-label="Close"><svg class="vector-close" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+        </header>
+            <p id="groupStatus" class="invite-status" role="status" aria-live="polite"></p>
+        <div id="groupDetailsStep" class="group-step">
+            <div class="group-picture-area">
+                <input id="groupPictureInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+                <button id="groupPictureButton" class="group-picture-button" type="button" aria-label="Add a group picture">
+                    <img id="groupPicturePreview" alt="Group picture preview" hidden>
+                    <span id="groupPicturePlaceholder" class="group-picture-placeholder"><b aria-hidden="true"><svg class="vector-plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></b><small>Add picture</small></span>
+                    <span class="group-picture-camera" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7.5h3l1.4-2h7.2l1.4 2h3A1.5 1.5 0 0 1 21.5 9v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z"/><circle cx="12" cy="13" r="3.4"/></svg></span>
+                </button>
+                <div><strong>Give your group an identity</strong><p>Add a name and optional picture. You can update them later.</p></div>
+            </div>
+            <label for="groupName">Group name</label>
+            <input id="groupName" class="group-name-input" maxlength="100" placeholder="e.g. Weekend plans" autocomplete="off">
+            <button id="groupAddPeople" class="send-invite-button group-next-button" type="button">Add people <span aria-hidden="true"><svg class="vector-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></button>
+        </div>
+        <div id="groupMembersStep" class="group-step hidden">
+            <div class="group-member-heading"><strong>Add members</strong><span id="groupSelectedCount">Select people you know</span></div>
+            <input id="groupMemberSearch" class="group-name-input group-member-search" type="search" placeholder="Search your chats and contacts" aria-label="Search people you have chatted with or saved">
+            <div id="selectedGroupMembers" class="selected-group-members" aria-live="polite"></div>
+            <div id="groupMemberResults" class="group-member-results"><div class="user-search-empty">Loading your people…</div></div>
+            <p class="group-picker-note">Only people you have chatted with or saved appear here.</p>
+            <button id="createGroupButton" class="send-invite-button" type="button">Create group</button>
+        </div>
+    </div>
+</section>
+
+<!-- ACCOUNT SETTINGS -->
+<section id="settingsPanel" class="chat-modal" aria-hidden="true">
+    <div class="chat-modal-backdrop" data-close-settings></div>
+    <div class="chat-modal-card settings-modal-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <header class="chat-modal-header"><div><span class="modal-eyebrow">YOUR ACCOUNT</span><h2 id="settingsTitle">Settings</h2></div><button id="closeSettings" class="modal-close" type="button" aria-label="Close"><svg class="vector-close" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header>
+        <div class="settings-profile">
+            <button id="profilePhotoButton" class="settings-avatar" type="button" aria-label="Add or change profile photo or short video"><span id="profilePhotoVisual">W</span><span class="profile-photo-add" aria-hidden="true"><svg class="vector-plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
+            <input id="profilePhotoInput" type="file" accept="image/*,video/mp4,video/webm" hidden>
+            <div class="settings-profile-copy"><strong id="settingsName">W.F.C member</strong><span id="settingsUsername"></span><span id="settingsPhoneVerification" class="settings-phone-verification"></span><small>Update your public profile</small></div>
+            <button id="editProfileButton" class="profile-edit-launch" type="button">Edit</button>
+        </div>
+        <div id="settingsHome" class="settings-options">
+            <button type="button" data-setting="profile"><span>My profile</span><small>Name, username and about</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="subscription"><span>Subscription</span><small>Free access</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="device"><span>Link device</span><small>Use W.F.C on another device</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="account"><span>Account</span><small>Profile and sign-in</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="privacy"><span>Privacy</span><small>How your details are shared</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="lists"><span>Lists</span><small>People and conversations</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="chats"><span>Chats</span><small>Open your conversations</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="appearance"><span>Appearance</span><small id="themeSummary">Dark theme</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="notifications"><span>Notifications</span><small>Browser notification status</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="language"><span>App language</span><small>Choose display language</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+            <button type="button" data-setting="invite"><span>Invite a contact</span><small>Send an invitation link by SMS</small><b><svg class="vector-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></b></button>
+        </div>
+        <section id="settingsDetail" class="settings-detail hidden" aria-live="polite"></section>
+        <button id="signOutButton" class="sign-out-button" type="button">Sign out of this device</button>
+        <p class="settings-from">From <strong>Zen X</strong></p>
+    </div>
+</section>
+
 <!-- LANGUAGE -->
 <section
     id="languagePanel"
@@ -246,7 +461,7 @@
                 class="icon-button"
                 data-i18n-aria-label="back"
                 aria-label="Back">
-                ←
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7M8 12h12"/></svg>
             </button>
 
             <h2 data-i18n="language">
@@ -267,7 +482,9 @@
 
 <script src="/wfc-core.js?v=1"></script>
 <script src="/wfc-language.js?v=2"></script>
-<script src="/chat.js?v=2"></script>
+<script src="/wfc-motion.js?v=2"></script>
+<script src="/vendor/lottie.min.js?v=1"></script>
+<script src="/chat.js?v=63"></script>
 
 </body>
 </html>
